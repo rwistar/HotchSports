@@ -12,7 +12,6 @@ import UserNotifications
 class ScoreTableViewCell: UITableViewCell {
     @IBOutlet weak var lblScoreDate: UILabel!
     @IBOutlet weak var lblScoreTeam: UILabel!
-//    @IBOutlet weak var lblScoreEvent: UILabel!
     @IBOutlet weak var lblScoreOpp: UILabel!
     @IBOutlet weak var lblScoreValue: UILabel!
     
@@ -28,29 +27,15 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var testScoreTexts = [
         ["Varsity Volleyball", "10/17/2018", "4:00 PM", "home", "Deerfield", "loss", "0-3"],
-        ["JV Volleyball", "10/17/2018", "4:00 PM", "home", "Deerfield", "win", "3-1"],
-        ["Girls Thirds Soccer", "10/17/2018", "3:00 PM", "home", "Westminster", "win", "4-0"],
         ["Boys Varsity Water Polo", "10/17/2018", "3:00 PM", "home", "Loomis", "loss", "9-14"],
-        ["Boys JV Soccer", "10/17/2018", "2:30 PM", "away", "Salisbury", "win", "5-1"],
-        ["Thirds Volleyball", "10/17/2018", "2:30 PM", "away", "Taft", "win", "3-0"],
         ["Varsity Volleyball", "10/13/2018", "6:30 PM", "away", "Loomis", "loss", "0-3"],
-        ["JV Volleyball", "10/13/2018", "6:30 PM", "away", "Loomis", "loss", "0-3"],
         ["Boys Varsity Soccer", "10/13/2018", "3:30 PM", "away", "Deerfield", "loss", "0-4"],
         ["Boys Varsity Water Polo", "10/13/2018", "3:30 PM", "away", "Deerfield", "loss", "10-14"],
-        ["Boys Thirds Soccer", "10/13/2018", "3:30 PM", "away", "Deerfield", "win", "1-0"],
-        ["Boys JV Soccer", "10/13/2018", "3:30 PM", "away", "Deerfield", "tie", "1-1"],
-        ["Thirds Field Hockey", "10/13/2018", "3:30 PM", "away", "Westminster", "cancel", ""],
-        ["Thirds Field Hockey", "10/19/2018", "3:00 PM", "home", "HVRHS", "future", ""],
-        ["Thirds Volleyball", "10/19/2018", "4:15 PM", "home", "IMS", "future", ""],
         ["Girls Varsity Soccer", "10/19/2018", "6:30 PM", "home", "Choate", "future", ""],
         ["Varsity Field Hockey", "10/20/2018", "1:30 PM", "home", "Choate", "future", ""],
         ["Varsity Volleyball", "10/20/2018", "1:30 PM", "home", "Choate", "future", ""],
-        ["JV Volleyball", "10/20/2018", "1:30 PM", "home", "Choate", "future", ""],
         ["Boys Varsity Soccer", "10/20/2018", "2:00 PM", "home", "Choate", "future", ""],
-        ["Boys JV Soccer", "10/20/2018", "2:00 PM", "home", "Choate", "future", ""],
-        
-        
-        ]
+    ]
     
     var myScoreTeams: [String : Bool] = [
         "Boys Cross Country": true,
@@ -64,9 +49,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         "Water Polo": true
     ]
     
-
-    
-    //var myScoreItems = [ScoreItem]()
     var filteredScores = [ScoreItem]()
 
     override func viewDidLoad() {
@@ -82,8 +64,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         loadTestScores()
         filterScores()
         
-//        print(filteredScores)
-
         if #available(iOS 10.0, *) {
             tblScores.refreshControl = refreshControl
         } else {
@@ -93,40 +73,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         refreshControl.addTarget(self, action: #selector(refreshScores(_:)), for: .valueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing Scores")
         
-//        let center = UNUserNotificationCenter.current()
-//        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-//            // Enable or disable features based on authorization.
-//        }
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Weekly Staff Meeting"
-        content.body = "Every Tuesday at 2pm"
-        
-        var dateComponents = DateComponents()
-        dateComponents.calendar = Calendar.current
-
-        dateComponents.weekday = 3  // Tuesday
-        dateComponents.hour = 11    // 14:00 hours
-        dateComponents.minute = 53
-        
-        print(dateComponents)
-        
-        // Create the trigger as a repeating event.
-        let trigger = UNCalendarNotificationTrigger(
-            dateMatching: dateComponents, repeats: true)
-        
-        // Create the request
-        let uuidString = UUID().uuidString
-        let request = UNNotificationRequest(identifier: uuidString,
-                    content: content, trigger: trigger)
-
-        // Schedule the request with the system.
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.add(request) { (error) in
-           if error != nil {
-              // Handle any errors.
-           }
-        }
     }
     
     @objc
@@ -137,18 +83,14 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @objc
     func stopRefresh() {
-//        print(myScoreItems[13])
-//        print(myScoreItems[14])
-//        print(myScoreItems[15])
+        myScoreItems[5].myScoreResult = .tie
+        myScoreItems[5].myScoreText = "1-1"
         
-        myScoreItems[13].myScoreResult = .win
-        myScoreItems[13].myScoreText = "2-0"
+        myScoreItems[6].myScoreResult = .win
+        myScoreItems[6].myScoreText = "2-0"
         
-        myScoreItems[14].myScoreResult = .lose
-        myScoreItems[14].myScoreText = "2-3"
-        
-        myScoreItems[15].myScoreResult = .tie
-        myScoreItems[15].myScoreText = "1-1"
+        myScoreItems[7].myScoreResult = .lose
+        myScoreItems[7].myScoreText = "2-3"
         
         filterScores()
         tblScores.reloadData()
@@ -160,9 +102,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         for scoreText in testScoreTexts {
             print(scoreText)
             
-            //        let scoreText = testScoreTexts[0]
-            //        print(scoreText)
-            
             let team = scoreText[0]
             
             let date = scoreText[1]
@@ -170,7 +109,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             let month = Int(dateParts[0])!
             let day = Int(dateParts[1])!
             let year = Int(dateParts[2])!
-            //            print(dateParts)
             
             let time = scoreText[2]
             let timeParts = time.split(separator: " ")
@@ -182,16 +120,12 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                 hour += 12
             }
             
-            //            print(timeParts)
-            //            print(timeNumParts)
-            
             var dateComponents = DateComponents()
             dateComponents.year = year
             dateComponents.month = month
             dateComponents.day = day
             dateComponents.hour = hour
             dateComponents.minute = mins
-            //            print(dateComponents)
             
             var loc: ScoreItem.Location = .other
             switch scoreText[3] {
@@ -215,12 +149,9 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             let score = scoreText[6]
             
             let scoreItem = ScoreItem(myScoreTeam: Team(myTeamName: team), myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opp), myScoreResult: result, myScoreText: score)
-            //            print(scoreItem)
             
             myScoreItems.append(scoreItem)
         }
-        
-        //print(myScoreItems)
     }
     
 //    override func viewDidAppear(_ animated: Bool) {
@@ -284,7 +215,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         cell.lblScoreDate.text = date
         cell.lblScoreTeam.text = team.description
-//        cell.lblScoreEvent.text = "\(date) \(team)"
         cell.lblScoreOpp.text = locText
         cell.lblScoreValue.text = result
         
@@ -297,9 +227,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         for scoreItem in myScoreItems {
             for team in myScoreTeams.keys {
-//                print(teamWords)
                 if myScoreTeams[team] == true && scoreItemMatch(team: scoreItem.myScoreTeam.myTeamName, key: team) {
-//                    print("Found \(team) in \(scoreItem.myScoreTeam.myTeamName)")
                     filteredScores.append(scoreItem)
                 }
             }
@@ -361,26 +289,10 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         myScoreTeams = teamFlags
         
-//        print(myScoreTeams)
-        
         filterScores()
-//        print(filteredScores)
-        
+
         tblScores.reloadData()
     }
     
-    @IBAction func pressedNotify(_ sender: UIBarButtonItem) {
-        print("*** pressedNotify")
-        
-//        let alert = UIAlertController(title: "Hey there!", message: "Did you finish reading this?", preferredStyle: .alert)
-//
-//
-//        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-//
-//        self.present(alert, animated: false)
 
-
-    }
-    
-    
 }

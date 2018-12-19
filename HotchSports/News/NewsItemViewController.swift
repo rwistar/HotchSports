@@ -18,8 +18,6 @@ class NewsItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        myURLString = "https://www.hotchkiss.org/athletics/news-post/~post/petersen-22-places-second-at-singlehanded-nationals-20181029"
-
         if let url = myURLString {
             if url == "https://www.hotchkiss.org/athletics/news-post/~post/petersen-22-places-second-at-singlehanded-nationals-20181029" {
                 lblNewsHead.text = "Petersen '22 Places Second at Singlehanded Nationals"

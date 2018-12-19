@@ -98,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aVZ-b1-TKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4584.8000000000002" y="810.94452773613204"/>
+            <point key="canvasLocation" x="3916" y="825"/>
         </scene>
         <!--Select Notifications View Controller-->
         <scene sceneID="XEr-6i-ryr">
@@ -159,7 +159,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YTP-R3-Lge" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5427.5" y="810.5"/>
+            <point key="canvasLocation" x="4758" y="824"/>
         </scene>
         <!--Scores and Schedule-->
         <scene sceneID="FJk-Ac-oVp">
@@ -907,7 +907,7 @@
         <image name="twitter" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oJW-Cm-oVF"/>
-        <segue reference="G42-jC-ipE"/>
+        <segue reference="72b-Dg-zmK"/>
+        <segue reference="Eaq-iX-zsJ"/>
     </inferredMetricsTieBreakers>
 </document>

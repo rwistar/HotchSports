@@ -35,12 +35,10 @@ class TeamScoreViewController: UIViewController, UITableViewDataSource, UITableV
         
         // Do any additional setup after loading the view.
         
-//        teamName = "Varsity Field Hockey"
-        
         if let team = teamName {
             filterRecordScores(team)
         }
-        //        print(filteredScores)
+
         updateLabels()
       
     }

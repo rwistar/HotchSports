@@ -8,8 +8,6 @@
 
 import UIKit
 
-var whichSeason = "Fall"
-
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var segSeason: UISegmentedControl!
@@ -38,9 +36,9 @@ class SettingsViewController: UIViewController {
 
     @IBAction func seasonChanged(_ sender: UISegmentedControl) {
     
-        whichSeason = sender.titleForSegment(at: sender.selectedSegmentIndex)!
+        whichSeason = Season(rawValue: sender.selectedSegmentIndex)!
         
-        print(whichSeason)
+        print(seasonNames[whichSeason.rawValue])
     
     }
     

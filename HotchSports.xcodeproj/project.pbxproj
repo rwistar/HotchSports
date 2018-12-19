@@ -176,8 +176,8 @@
 		8F85D88D21CB040F00F1DFCD /* Team */ = {
 			isa = PBXGroup;
 			children = (
-				8F8A4DD121CB035B00628A43 /* TeamScoreViewController.swift */,
 				8F8A4DC821CB035A00628A43 /* TeamTableViewController.swift */,
+				8F8A4DD121CB035B00628A43 /* TeamScoreViewController.swift */,
 			);
 			path = Team;
 			sourceTree = "<group>";

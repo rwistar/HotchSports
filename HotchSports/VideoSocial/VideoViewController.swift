@@ -21,8 +21,6 @@ class VideoViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var myVideos = [VideoItem]()
     
-//    var player: AVPlayer?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +52,6 @@ class VideoViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // Configure the cell...
         
-//        let videoURL = URL(string: myVideoURLS[indexPath.row])
-
         let video = myVideos[indexPath.row]
         let title = video.myVideoTitle
         let url = video.myVideoURL

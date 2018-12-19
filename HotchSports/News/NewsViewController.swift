@@ -81,8 +81,6 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             myNewsItems.append(newsItem)
         }
-
-//        print(myNewsItems)
     }
 
     @objc
@@ -122,7 +120,6 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredNews.count
-//        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -151,13 +148,9 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func filterNewsItems() {
         filteredNews = [NewsItem]()
         
-//        filteredScores = [ScoreItem]()
-//
         for newsItem in myNewsItems {
             for team in myNewsTeams.keys {
-                //                print(teamWords)
                 if myNewsTeams[team] == true && newsItemMatch(team: newsItem.myNewsTeam.myTeamName, key: team) {
-                    //                    print("Found \(team) in \(scoreItem.myScoreTeam.myTeamName)")
                     filteredNews.append(newsItem)
                 }
             }
@@ -228,12 +221,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         print("\n\n\nUPDATE_SCORE_TABLE")
         
         myNewsTeams = teamFlags
-//
-//        //        print(myScoreTeams)
-//
         filterNewsItems()
-//        //        print(filteredScores)
-//
         tblNewsItems.reloadData()
     }
 }
