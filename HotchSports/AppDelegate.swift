@@ -1,12 +1,13 @@
 //
 //  AppDelegate.swift
-//  HotchSports
+//  HotchSportsProto
 //
-//  Created by Roger Wistar on 12/18/18.
-//  Copyright © 2018 The Hotchkiss School. All rights reserved.
+//  Created by Roger Wistar on 10/17/18.
+//  Copyright © 2018 Roger Wistar. All rights reserved.
 //
 
 import UIKit
+import AVKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+        }
+        catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
+        
         return true
     }
 
