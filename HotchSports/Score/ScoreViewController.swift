@@ -52,7 +52,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var filteredScores = [ScoreItem]()
 
-    func testParse() -> String {
+    func loadScores() {
         let url = URL(string: "https://www.hotchkiss.org/athletics/our-teams/girls-hockey/varsity")!
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -138,8 +138,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                     
                     DispatchQueue.main.async {
                         self.tblScores.reloadData()
-                        // Do all your UI stuff here
-
                     }
                     
                     
@@ -153,10 +151,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         }
         task.resume()
-
-        print(myScoreItems)
-
-        return ""
     }
     
     func getMonthNum(_ month: String) -> Int {
@@ -189,9 +183,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Do any additional setup after loading the view.
         
         //loadTestScores()
-        testParse()
-        
-        print(myScoreItems)
+        loadScores()
         filterScores()
         
         if #available(iOS 10.0, *) {
