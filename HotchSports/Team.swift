@@ -51,7 +51,7 @@ var winterTeams = [
     Team(myTeamName: "Coed Varsity Wrestling"),
 ]
 
-var whichTeams = fallTeams
+var whichTeams = winterTeams
 
 
 

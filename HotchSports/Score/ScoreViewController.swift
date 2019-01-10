@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import UserNotifications
+import SwiftSoup
 
 class ScoreTableViewCell: UITableViewCell {
     @IBOutlet weak var lblScoreDate: UILabel!
@@ -46,10 +46,137 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         "Boys Soccer": true,
         "Girls Soccer": true,
         "Volleyball": true,
-        "Water Polo": true
+        "Water Polo": true,
+        "Girls Hockey": true,
     ]
     
     var filteredScores = [ScoreItem]()
+
+    func testParse() -> String {
+        let url = URL(string: "https://www.hotchkiss.org/athletics/our-teams/girls-hockey/varsity")!
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+            } else {
+                let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                
+                //print(htmlContent)
+                
+                do {
+                    let doc: Document = try SwiftSoup.parse(htmlContent as! String)
+                    let body: Element = doc.body()!
+
+                    for tag in ["fsResultCustom", "fsResultWin", "fsResultLoss", "fsResultTie"] {
+                        let scoreHTML: Elements = try body.getElementsByClass(tag)
+                        
+                        let scores: [Element] = scoreHTML.array()
+                        
+                        for score in scores {
+                            let opponentItems: Element = try score.getElementsByClass("fsAthleticsOpponents").array()[0]
+                            let opponent: String = try opponentItems.getElementsByClass("fsAthleticsOpponentName").text()
+                            
+                            let homeAway: String = try score.getElementsByClass("fsAthleticsLocations").text()
+                            var homeAwayCode = ""
+                            if homeAway == "Hotchkiss" {
+                                homeAwayCode = "vs."
+                            } else {
+                                homeAwayCode = "@"
+                            }
+                            
+                            
+                            //print(opponent)
+
+                            let dateItems: Element = try score.getElementsByClass("fsAthleticsDate").array()[0]
+                            let month: String = try dateItems.getElementsByClass("fsMonth").array()[0].text()
+                            let day: String = try dateItems.getElementsByClass("fsDay").array()[0].text()
+                            let monthNum = self.getMonthNum(month)
+
+                            let timeItems: Element = try score.getElementsByClass("fsAthleticsTime").array()[0]
+                            let hour: String = try timeItems.getElementsByClass("fsHour").text()
+                            let mins: String = try timeItems.getElementsByClass("fsMinute").text()
+
+                            //let dateItems: [Element] = date.array()
+                            
+                            let score: String = try score.getElementsByClass("fsAthleticsScore").text()
+                            
+                            print("\(monthNum)/\(day), \(hour):\(mins) -- \(homeAwayCode) \(opponent)-- \(score)")
+                            
+                            var dateComponents = DateComponents()
+                            dateComponents.month = monthNum
+                            dateComponents.day = Int(day)
+                            dateComponents.hour = Int(hour)
+                            dateComponents.minute = Int(mins)
+
+                            var loc: ScoreItem.Location = .other
+                            if homeAway == "Hotchkiss" {
+                                loc = .home
+                            } else {
+                                loc = .away
+                            }
+
+                            var result: ScoreItem.GameResult = .other
+                            switch tag {
+                            case "fsResultWin": result = .win
+                            case "fsResultLoss": result = .lose
+                            case "fsResultTie": result = .tie
+                            //case "cancel": result = .cancel
+                            case "fsResultCustom": result = .future
+                            default: result = .other
+                            }
+
+                            let scoreItem = ScoreItem(myScoreTeam: Team(myTeamName: "Girls Varsity Hockey"), myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opponent), myScoreResult: result, myScoreText: score)
+
+                            myScoreItems.append(scoreItem)
+                            
+                        }
+
+                    }
+                    
+                    self.filterScores()
+                    
+                    DispatchQueue.main.async {
+                        self.tblScores.reloadData()
+                        // Do all your UI stuff here
+
+                    }
+                    
+                    
+                } catch Exception.Error(let type, let message) {
+                    print(message)
+                } catch {
+                    print("error")
+                }
+                
+            }
+            
+        }
+        task.resume()
+
+        print(myScoreItems)
+
+        return ""
+    }
+    
+    func getMonthNum(_ month: String) -> Int {
+        switch month {
+        case "January": return 1
+        case "February": return 2
+        case "March": return 3
+        case "April": return 4
+        case "May": return 5
+        case "June": return 6
+        case "July": return 7
+        case "August": return 8
+        case "September": return 9
+        case "October": return 10
+        case "November": return 11
+        case "December": return 12
+        default: return -1
+        }
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +188,10 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                 
         // Do any additional setup after loading the view.
         
-        loadTestScores()
+        //loadTestScores()
+        testParse()
+        
+        print(myScoreItems)
         filterScores()
         
         if #available(iOS 10.0, *) {
@@ -72,6 +202,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         refreshControl.addTarget(self, action: #selector(refreshScores(_:)), for: .valueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing Scores")
+        
         
     }
     
