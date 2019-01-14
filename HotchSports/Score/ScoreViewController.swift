@@ -53,104 +53,121 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     var filteredScores = [ScoreItem]()
 
     func loadScores() {
-        let url = URL(string: "https://www.hotchkiss.org/athletics/our-teams/girls-hockey/varsity")!
+        for team in whichTeams {
+            let teamURL = teamURLS[team.myTeamName]
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            let url = URL(string: "https://www.hotchkiss.org/athletics/our-teams/\(teamURL!)/varsity")!
+            print(url)
             
-            if error != nil {
-                print(error!)
-            } else {
-                let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 
-                //print(htmlContent)
-                
-                do {
-                    let doc: Document = try SwiftSoup.parse(htmlContent as! String)
-                    let body: Element = doc.body()!
+                if error != nil {
+                    print(error!)
+                } else {
+                    let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                    
+                    //print(htmlContent)
+                    
+                    do {
+                        let doc: Document = try SwiftSoup.parse(htmlContent as! String)
+                        let body: Element = doc.body()!
 
-                    for tag in ["fsResultCustom", "fsResultWin", "fsResultLoss", "fsResultTie"] {
-                        let scoreHTML: Elements = try body.getElementsByClass(tag)
-                        
-                        let scores: [Element] = scoreHTML.array()
-                        
-                        for score in scores {
-                            let opponentItems: Element = try score.getElementsByClass("fsAthleticsOpponents").array()[0]
-                            let opponent: String = try opponentItems.getElementsByClass("fsAthleticsOpponentName").text()
+                        for tag in ["fsResultCustom", "fsResultWin", "fsResultLoss", "fsResultTie"] {
+                            let scoreHTML: Elements = try body.getElementsByClass(tag)
                             
-                            let homeAway: String = try score.getElementsByClass("fsAthleticsLocations").text()
-                            var homeAwayCode = ""
-                            if homeAway == "Hotchkiss" {
-                                homeAwayCode = "vs."
-                            } else {
-                                homeAwayCode = "@"
+                            let scores: [Element] = scoreHTML.array()
+                            
+                            for score in scores {
+                                let opponentItems: Element = try score.getElementsByClass("fsAthleticsOpponents").array()[0]
+                                let opponent: String = try opponentItems.getElementsByClass("fsAthleticsOpponentName").text()
+                                
+                                let homeAway: String = try score.getElementsByClass("fsAthleticsLocations").text()
+                                var homeAwayCode = ""
+                                if homeAway == "Hotchkiss" {
+                                    homeAwayCode = "vs."
+                                } else {
+                                    homeAwayCode = "@"
+                                }
+                                
+                                
+                                //print(opponent)
+
+                                let dateItems: Element = try score.getElementsByClass("fsAthleticsDate").array()[0]
+                                let yearPart: Element = try dateItems.getElementsByClass("fsDate").array()[0]
+                                print("Yearpart = \(yearPart)")
+                                let datePart = try? yearPart.attr("datetime")
+                                print("Datepart = \(datePart)")
+                                let year = datePart!.prefix(4)
+                                let month: String = try dateItems.getElementsByClass("fsMonth").array()[0].text()
+                                let day: String = try dateItems.getElementsByClass("fsDay").array()[0].text()
+                                let monthNum = self.getMonthNum(month)
+
+                                let timeItems: Element = try score.getElementsByClass("fsAthleticsTime").array()[0]
+                                let hour: String = try timeItems.getElementsByClass("fsHour").text()
+                                let mins: String = try timeItems.getElementsByClass("fsMinute").text()
+
+                                //let dateItems: [Element] = date.array()
+                                
+                                let score: String = try score.getElementsByClass("fsAthleticsScore").text()
+                                
+                                print("\(monthNum)/\(day)/\(year), \(hour):\(mins) -- \(homeAwayCode) \(opponent)-- \(score)")
+                                
+                                var dateComponents = DateComponents()
+                                dateComponents.year = Int(String(year))
+                                dateComponents.month = monthNum
+                                dateComponents.day = Int(day)
+                                dateComponents.hour = Int(hour)
+                                dateComponents.minute = Int(mins)
+
+                                var loc: ScoreItem.Location = .other
+                                if homeAway == "Hotchkiss" {
+                                    loc = .home
+                                } else {
+                                    loc = .away
+                                }
+
+                                var result: ScoreItem.GameResult = .other
+                                switch tag {
+                                case "fsResultWin": result = .win
+                                case "fsResultLoss": result = .lose
+                                case "fsResultTie": result = .tie
+                                //case "cancel": result = .cancel
+                                case "fsResultCustom": result = .future
+                                default: result = .other
+                                }
+
+                                let scoreItem = ScoreItem(myScoreTeam: team, myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opponent), myScoreResult: result, myScoreText: score)
+
+                                myScoreItems.append(scoreItem)
+                                
                             }
-                            
-                            
-                            //print(opponent)
 
-                            let dateItems: Element = try score.getElementsByClass("fsAthleticsDate").array()[0]
-                            let month: String = try dateItems.getElementsByClass("fsMonth").array()[0].text()
-                            let day: String = try dateItems.getElementsByClass("fsDay").array()[0].text()
-                            let monthNum = self.getMonthNum(month)
-
-                            let timeItems: Element = try score.getElementsByClass("fsAthleticsTime").array()[0]
-                            let hour: String = try timeItems.getElementsByClass("fsHour").text()
-                            let mins: String = try timeItems.getElementsByClass("fsMinute").text()
-
-                            //let dateItems: [Element] = date.array()
-                            
-                            let score: String = try score.getElementsByClass("fsAthleticsScore").text()
-                            
-                            print("\(monthNum)/\(day), \(hour):\(mins) -- \(homeAwayCode) \(opponent)-- \(score)")
-                            
-                            var dateComponents = DateComponents()
-                            dateComponents.month = monthNum
-                            dateComponents.day = Int(day)
-                            dateComponents.hour = Int(hour)
-                            dateComponents.minute = Int(mins)
-
-                            var loc: ScoreItem.Location = .other
-                            if homeAway == "Hotchkiss" {
-                                loc = .home
-                            } else {
-                                loc = .away
-                            }
-
-                            var result: ScoreItem.GameResult = .other
-                            switch tag {
-                            case "fsResultWin": result = .win
-                            case "fsResultLoss": result = .lose
-                            case "fsResultTie": result = .tie
-                            //case "cancel": result = .cancel
-                            case "fsResultCustom": result = .future
-                            default: result = .other
-                            }
-
-                            let scoreItem = ScoreItem(myScoreTeam: Team(myTeamName: "Girls Varsity Hockey"), myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opponent), myScoreResult: result, myScoreText: score)
-
-                            myScoreItems.append(scoreItem)
-                            
                         }
-
+                        
+                        self.filterScores()
+                        self.sortScores()
+                        
+                        DispatchQueue.main.async {
+                            self.tblScores.reloadData()
+                        }
+                        
+                        
+                    } catch Exception.Error(let type, let message) {
+                        print(message)
+                    } catch {
+                        print("error")
                     }
                     
-                    self.filterScores()
-                    
-                    DispatchQueue.main.async {
-                        self.tblScores.reloadData()
-                    }
-                    
-                    
-                } catch Exception.Error(let type, let message) {
-                    print(message)
-                } catch {
-                    print("error")
                 }
                 
             }
-            
+            task.resume()
+
         }
-        task.resume()
+    }
+    
+    func sortScores() {
+        filteredScores.sort(by: <)        
     }
     
     func getMonthNum(_ month: String) -> Int {
@@ -185,6 +202,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         //loadTestScores()
         loadScores()
         filterScores()
+        sortScores()
         
         if #available(iOS 10.0, *) {
             tblScores.refreshControl = refreshControl

@@ -53,7 +53,18 @@ var winterTeams = [
 
 var whichTeams = winterTeams
 
-
+var teamURLS: [String: String] =
+[
+    "Boys Varsity Basketball": "boys-basketball",
+    "Girls Varsity Basketball": "girls-basketball",
+    "Boys Varsity Hockey": "boys-hockey",
+    "Girls Varsity Hockey": "girls-hockey",
+    "Boys Varsity Squash": "boys-squash",
+    "Girls Varsity Squash": "girls-squash",
+    "Boys Varsity Swimming": "boys-swimming",
+    "Girls Varsity Swimming": "girls-swimming",
+    "Coed Varsity Wrestling": "wrestling",
+]
 
 struct Team: CustomStringConvertible {
     var myTeamName: String
