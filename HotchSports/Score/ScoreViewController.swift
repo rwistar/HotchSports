@@ -47,13 +47,25 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         "Girls Soccer": true,
         "Volleyball": true,
         "Water Polo": true,
+        "Boys Basketball": true,
+        "Girls Basketball": true,
+        "Boys Hockey": true,
         "Girls Hockey": true,
+        "Boys Squash": true,
+        "Girls Squash": true,
+        "Boys Swimming": true,
+        "Girls Swimming": true,
+        "Coed Wrestling": true,
     ]
     
     var filteredScores = [ScoreItem]()
 
     func loadScores() {
+        var doneTeams: [String: Bool] = [:]
+    
         for team in whichTeams {
+            doneTeams[team.myTeamName] = false
+        
             let teamURL = teamURLS[team.myTeamName]
         
             let url = URL(string: "https://www.hotchkiss.org/athletics/our-teams/\(teamURL!)/varsity")!
@@ -94,9 +106,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
 
                                 let dateItems: Element = try score.getElementsByClass("fsAthleticsDate").array()[0]
                                 let yearPart: Element = try dateItems.getElementsByClass("fsDate").array()[0]
-                                print("Yearpart = \(yearPart)")
                                 let datePart = try? yearPart.attr("datetime")
-                                print("Datepart = \(datePart)")
                                 let year = datePart!.prefix(4)
                                 let month: String = try dateItems.getElementsByClass("fsMonth").array()[0].text()
                                 let day: String = try dateItems.getElementsByClass("fsDay").array()[0].text()
@@ -105,18 +115,33 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 let timeItems: Element = try score.getElementsByClass("fsAthleticsTime").array()[0]
                                 let hour: String = try timeItems.getElementsByClass("fsHour").text()
                                 let mins: String = try timeItems.getElementsByClass("fsMinute").text()
+                                let AMPM: String = try timeItems.getElementsByClass("fsMeridian").text()
+                                
+                                var hourVal = 0
+                                if let hourInt = Int(hour) {
+                                    if AMPM == "PM" {
+                                        hourVal = hourInt + 12
+                                    } else {
+                                        hourVal = hourInt
+                                    }
+                                }
+                                
+//                                var hourVal = Int(hour)
+//                                if hourVal != nil && AMPM == "PM" {
+//                                    hourVal += 12
+//                                }
 
                                 //let dateItems: [Element] = date.array()
                                 
                                 let score: String = try score.getElementsByClass("fsAthleticsScore").text()
                                 
-                                print("\(monthNum)/\(day)/\(year), \(hour):\(mins) -- \(homeAwayCode) \(opponent)-- \(score)")
+//                                print("\(monthNum)/\(day)/\(year), \(hourVal):\(mins) -- \(homeAwayCode) \(opponent)-- \(score)")
                                 
                                 var dateComponents = DateComponents()
                                 dateComponents.year = Int(String(year))
                                 dateComponents.month = monthNum
                                 dateComponents.day = Int(day)
-                                dateComponents.hour = Int(hour)
+                                dateComponents.hour = hourVal
                                 dateComponents.minute = Int(mins)
 
                                 var loc: ScoreItem.Location = .other
@@ -144,12 +169,24 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
 
                         }
                         
-                        self.filterScores()
-                        self.sortScores()
+                        doneTeams[team.myTeamName] = true
+                        print("\(team.myTeamName) is done!")
                         
-                        DispatchQueue.main.async {
-                            self.tblScores.reloadData()
+                        var allDone = true
+                        for teamName in doneTeams.keys {
+                            allDone = allDone && doneTeams[teamName]!
                         }
+                        
+                        if allDone == true {
+                            print("Time to sort!")
+                            self.filterScores()
+                            self.sortScores()
+                            
+                            DispatchQueue.main.async {
+                                self.tblScores.reloadData()
+                            }
+                        }
+                        
                         
                         
                     } catch Exception.Error(let type, let message) {
@@ -219,23 +256,12 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     @objc
     private func refreshScores(_ sender: Any) {
         print("refresh called")
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.stopRefresh), userInfo: nil, repeats: false)
+        loadScores()
+        refreshControl.endRefreshing()
     }
     
     @objc
     func stopRefresh() {
-        myScoreItems[5].myScoreResult = .tie
-        myScoreItems[5].myScoreText = "1-1"
-        
-        myScoreItems[6].myScoreResult = .win
-        myScoreItems[6].myScoreText = "2-0"
-        
-        myScoreItems[7].myScoreResult = .lose
-        myScoreItems[7].myScoreText = "2-3"
-        
-        filterScores()
-        tblScores.reloadData()
-
         refreshControl.endRefreshing()
     }
 
@@ -431,6 +457,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         myScoreTeams = teamFlags
         
         filterScores()
+        sortScores()
 
         tblScores.reloadData()
     }

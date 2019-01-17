@@ -72,30 +72,42 @@ struct ScoreItem: Equatable, Comparable {
     }
     
     static func < (lhs: ScoreItem, rhs: ScoreItem) -> Bool {
-//        if lhs.myScoreDate.year != rhs.myScoreDate.year {
-//            return lhs.myScoreDate.year! < rhs.myScoreDate.year!
-//        } else if lhs.myScoreDate.month != rhs.myScoreDate.month {
-//            return lhs.myScoreDate.month! < rhs.myScoreDate.month!
-//        } else if lhs.myScoreDate.day != rhs.myScoreDate.day {
-//            return lhs.myScoreDate.day! < rhs.myScoreDate.day!
-//        } else if lhs.myScoreDate.hour != rhs.myScoreDate.hour {
-//            return lhs.myScoreDate.hour! < rhs.myScoreDate.hour!
-//        } else if lhs.myScoreDate.minute != rhs.myScoreDate.minute {
-//            return lhs.myScoreDate.minute! < rhs.myScoreDate.minute!
-//        } else {
-//            return false
-//        }
-        
         if let lhYear = lhs.myScoreDate.year, let rhYear = rhs.myScoreDate.year {
-            return lhYear < rhYear
-        } else if let lhMonth = lhs.myScoreDate.month, let rhMonth = rhs.myScoreDate.month {
-            return lhMonth < rhMonth
-        } else if let lhDay = lhs.myScoreDate.day, let rhDay = rhs.myScoreDate.day {
-            return lhDay < rhDay
-        } else if let lhHour = lhs.myScoreDate.hour, let rhHour = rhs.myScoreDate.hour {
-            return lhHour < rhHour
-        } else if let lhMinute = lhs.myScoreDate.minute, let rhMinute = rhs.myScoreDate.minute {
-            return lhMinute < rhMinute
+            if lhYear != rhYear {
+                return lhYear < rhYear
+            }
+        }
+        if let lhMonth = lhs.myScoreDate.month, let rhMonth = rhs.myScoreDate.month {
+            if lhMonth != rhMonth {
+                return monthIsBefore(lh: lhMonth, rh: rhMonth)
+            }
+        }
+        if let lhDay = lhs.myScoreDate.day, let rhDay = rhs.myScoreDate.day {
+            if lhDay != rhDay {
+                return lhDay < rhDay
+            }
+        }
+        if let lhHour = lhs.myScoreDate.hour, let rhHour = rhs.myScoreDate.hour {
+            if lhHour != rhHour {
+                return lhHour < rhHour
+            }
+        }
+        if let lhMinute = lhs.myScoreDate.minute, let rhMinute = rhs.myScoreDate.minute {
+            if lhMinute != rhMinute {
+                return lhMinute < rhMinute
+            }
+        }
+        return false
+        
+    }
+    
+    static func monthIsBefore(lh: Int, rh: Int) -> Bool {
+        if lh >= 9 && rh < 9 {
+            return true
+        } else if lh < 9 && rh >= 9 {
+            return false
+        } else if lh < rh {
+            return true
         } else {
             return false
         }
