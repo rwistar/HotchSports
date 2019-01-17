@@ -22,20 +22,12 @@ var whichSeason: Season = .winter
 
 var fallTeams = [
     Team(myTeamName: "Varsity Field Hockey"),
-//    Team(myTeamName: "JV Field Hockey"),
-//    Team(myTeamName: "Thirds Field Hockey"),
     Team(myTeamName: "Girls Varsity Soccer"),
-//    Team(myTeamName: "Girls JV Soccer"),
-//    Team(myTeamName: "Girls Thirds Soccer"),
     Team(myTeamName: "Boys Varsity Soccer"),
-//    Team(myTeamName: "Boys JV Soccer"),
-//    Team(myTeamName: "Boys Thirds Soccer"),
     Team(myTeamName: "Boys Varsity Cross Country"),
     Team(myTeamName: "Girls Varsity Cross Country"),
     Team(myTeamName: "Varsity Mountain Biking"),
     Team(myTeamName: "Varsity Volleyball"),
-//    Team(myTeamName: "JV Volleyball"),
-//    Team(myTeamName: "Thirds Volleyball"),
     Team(myTeamName: "Boys Varsity Water Polo"),
 ]
 
@@ -52,6 +44,32 @@ var winterTeams = [
 ]
 
 var whichTeams = winterTeams
+
+var fallScoreTeams: [String : Bool] = [
+    "Boys Cross Country": true,
+    "Girls Cross Country": true,
+    "Field Hockey": true,
+    "Mountain Biking": true,
+    "Football": true,
+    "Boys Soccer": true,
+    "Girls Soccer": true,
+    "Volleyball": true,
+    "Water Polo": true,
+]
+
+var winterScoreTeams: [String: Bool] = [
+    "Boys Basketball": true,
+    "Girls Basketball": true,
+    "Boys Hockey": true,
+    "Girls Hockey": true,
+    "Boys Squash": true,
+    "Girls Squash": true,
+    "Boys Swimming": true,
+    "Girls Swimming": true,
+    "Coed Wrestling": true,
+]
+
+var myScoreTeams = winterScoreTeams
 
 var teamURLS: [String: String] =
 [

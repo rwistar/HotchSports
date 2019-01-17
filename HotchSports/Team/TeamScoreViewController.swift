@@ -37,6 +37,7 @@ class TeamScoreViewController: UIViewController, UITableViewDataSource, UITableV
         
         if let team = teamName {
             filterRecordScores(team)
+            filteredScores.sort(by: <)
         }
 
         updateLabels()

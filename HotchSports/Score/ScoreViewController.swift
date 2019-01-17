@@ -37,30 +37,11 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         ["Boys Varsity Soccer", "10/20/2018", "2:00 PM", "home", "Choate", "future", ""],
     ]
     
-    var myScoreTeams: [String : Bool] = [
-        "Boys Cross Country": true,
-        "Girls Cross Country": true,
-        "Field Hockey": true,
-        "Mountain Biking": true,
-        "Football": true,
-        "Boys Soccer": true,
-        "Girls Soccer": true,
-        "Volleyball": true,
-        "Water Polo": true,
-        "Boys Basketball": true,
-        "Girls Basketball": true,
-        "Boys Hockey": true,
-        "Girls Hockey": true,
-        "Boys Squash": true,
-        "Girls Squash": true,
-        "Boys Swimming": true,
-        "Girls Swimming": true,
-        "Coed Wrestling": true,
-    ]
-    
     var filteredScores = [ScoreItem]()
 
     func loadScores() {
+        myScoreItems = []
+    
         var doneTeams: [String: Bool] = [:]
     
         for team in whichTeams {
@@ -72,13 +53,10 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             print(url)
             
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                
                 if error != nil {
                     print(error!)
                 } else {
                     let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                    
-                    //print(htmlContent)
                     
                     do {
                         let doc: Document = try SwiftSoup.parse(htmlContent as! String)
@@ -94,16 +72,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 let opponent: String = try opponentItems.getElementsByClass("fsAthleticsOpponentName").text()
                                 
                                 let homeAway: String = try score.getElementsByClass("fsAthleticsLocations").text()
-                                var homeAwayCode = ""
-                                if homeAway == "Hotchkiss" {
-                                    homeAwayCode = "vs."
-                                } else {
-                                    homeAwayCode = "@"
-                                }
                                 
-                                
-                                //print(opponent)
-
                                 let dateItems: Element = try score.getElementsByClass("fsAthleticsDate").array()[0]
                                 let yearPart: Element = try dateItems.getElementsByClass("fsDate").array()[0]
                                 let datePart = try? yearPart.attr("datetime")
@@ -125,18 +94,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                         hourVal = hourInt
                                     }
                                 }
-                                
-//                                var hourVal = Int(hour)
-//                                if hourVal != nil && AMPM == "PM" {
-//                                    hourVal += 12
-//                                }
 
-                                //let dateItems: [Element] = date.array()
-                                
-                                let score: String = try score.getElementsByClass("fsAthleticsScore").text()
-                                
-//                                print("\(monthNum)/\(day)/\(year), \(hourVal):\(mins) -- \(homeAwayCode) \(opponent)-- \(score)")
-                                
                                 var dateComponents = DateComponents()
                                 dateComponents.year = Int(String(year))
                                 dateComponents.month = monthNum
@@ -144,6 +102,8 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 dateComponents.hour = hourVal
                                 dateComponents.minute = Int(mins)
 
+                                let score: String = try score.getElementsByClass("fsAthleticsScore").text()
+                                
                                 var loc: ScoreItem.Location = .other
                                 if homeAway == "Hotchkiss" {
                                     loc = .home
@@ -164,9 +124,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 let scoreItem = ScoreItem(myScoreTeam: team, myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opponent), myScoreResult: result, myScoreText: score)
 
                                 myScoreItems.append(scoreItem)
-                                
                             }
-
                         }
                         
                         doneTeams[team.myTeamName] = true
@@ -186,20 +144,14 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 self.tblScores.reloadData()
                             }
                         }
-                        
-                        
-                        
                     } catch Exception.Error(let type, let message) {
                         print(message)
                     } catch {
                         print("error")
                     }
-                    
                 }
-                
             }
             task.resume()
-
         }
     }
     
@@ -225,7 +177,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -249,8 +200,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         refreshControl.addTarget(self, action: #selector(refreshScores(_:)), for: .valueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing Scores")
-        
-        
     }
     
     @objc
@@ -265,61 +214,61 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         refreshControl.endRefreshing()
     }
 
-    func loadTestScores() {
-        for scoreText in testScoreTexts {
-            print(scoreText)
-            
-            let team = scoreText[0]
-            
-            let date = scoreText[1]
-            let dateParts = date.split(separator: "/")
-            let month = Int(dateParts[0])!
-            let day = Int(dateParts[1])!
-            let year = Int(dateParts[2])!
-            
-            let time = scoreText[2]
-            let timeParts = time.split(separator: " ")
-            let timeNumParts = timeParts[0].split(separator: ":")
-            var hour = Int(timeNumParts[0])!
-            let mins = Int(timeNumParts[1])!
-            let AMPM = timeParts[1]
-            if AMPM == "PM" {
-                hour += 12
-            }
-            
-            var dateComponents = DateComponents()
-            dateComponents.year = year
-            dateComponents.month = month
-            dateComponents.day = day
-            dateComponents.hour = hour
-            dateComponents.minute = mins
-            
-            var loc: ScoreItem.Location = .other
-            switch scoreText[3] {
-            case "home": loc = .home
-            case "away": loc = .away
-            default: loc = .other
-            }
-            
-            let opp = scoreText[4]
-            
-            var result: ScoreItem.GameResult = .other
-            switch scoreText[5] {
-            case "win": result = .win
-            case "loss": result = .lose
-            case "tie": result = .tie
-            case "cancel": result = .cancel
-            case "future": result = .future
-            default: result = .other
-            }
-            
-            let score = scoreText[6]
-            
-            let scoreItem = ScoreItem(myScoreTeam: Team(myTeamName: team), myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opp), myScoreResult: result, myScoreText: score)
-            
-            myScoreItems.append(scoreItem)
-        }
-    }
+//    func loadTestScores() {
+//        for scoreText in testScoreTexts {
+//            print(scoreText)
+//
+//            let team = scoreText[0]
+//
+//            let date = scoreText[1]
+//            let dateParts = date.split(separator: "/")
+//            let month = Int(dateParts[0])!
+//            let day = Int(dateParts[1])!
+//            let year = Int(dateParts[2])!
+//
+//            let time = scoreText[2]
+//            let timeParts = time.split(separator: " ")
+//            let timeNumParts = timeParts[0].split(separator: ":")
+//            var hour = Int(timeNumParts[0])!
+//            let mins = Int(timeNumParts[1])!
+//            let AMPM = timeParts[1]
+//            if AMPM == "PM" {
+//                hour += 12
+//            }
+//
+//            var dateComponents = DateComponents()
+//            dateComponents.year = year
+//            dateComponents.month = month
+//            dateComponents.day = day
+//            dateComponents.hour = hour
+//            dateComponents.minute = mins
+//
+//            var loc: ScoreItem.Location = .other
+//            switch scoreText[3] {
+//            case "home": loc = .home
+//            case "away": loc = .away
+//            default: loc = .other
+//            }
+//
+//            let opp = scoreText[4]
+//
+//            var result: ScoreItem.GameResult = .other
+//            switch scoreText[5] {
+//            case "win": result = .win
+//            case "loss": result = .lose
+//            case "tie": result = .tie
+//            case "cancel": result = .cancel
+//            case "future": result = .future
+//            default: result = .other
+//            }
+//
+//            let score = scoreText[6]
+//
+//            let scoreItem = ScoreItem(myScoreTeam: Team(myTeamName: team), myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opp), myScoreResult: result, myScoreText: score)
+//
+//            myScoreItems.append(scoreItem)
+//        }
+//    }
     
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(animated)
