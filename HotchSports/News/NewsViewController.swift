@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSoup
 
 class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var lblNewsHead: UILabel!
@@ -50,13 +51,9 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tblNewsItems.dataSource = self
         tblNewsItems.delegate = self
         
-        tblNewsItems.rowHeight = 100.0
+        tblNewsItems.rowHeight = 80.0
         
-        
-        // Do any additional setup after loading the view.
-        
-        loadTestNewsItems()
-        filterNewsItems()
+        loadNewsItems()
         
         if #available(iOS 10.0, *) {
             tblNewsItems.refreshControl = refreshControl
@@ -69,36 +66,97 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-    func loadTestNewsItems() {
-        for newsText in testNewsTexts {
-            print(newsText)
+    func loadNewsItems() {
+        myNewsItems = []
+        
+        var doneTeams: [String: Bool] = [:]
+    
+        for team in whichTeams {
+            doneTeams[team.myTeamName] = false
+        
+            let teamURL = teamURLS[team.myTeamName]
+        
+            let url = URL(string: "https://www.hotchkiss.org/athletics/our-teams/\(teamURL!)/varsity")!
+            print(url)
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error!)
+                } else {
+                    let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                    
+                    do {
+                        let doc: Document = try SwiftSoup.parse(htmlContent as! String)
+                        let body: Element = doc.body()!
 
-            let team = newsText[0]
-            let head = newsText[1]
-            let URL = newsText[2]
-            
-            let newsItem = NewsItem(myNewsTeam: Team(myTeamName: team), myNewsHead: head, myNewsURL: URL)
-            
-            myNewsItems.append(newsItem)
+                        let postsHTML: Elements = try body.getElementsByClass("fsPostLink")
+                        
+                        let posts: [Element] = postsHTML.array()
+                        
+                        for post in posts {
+                            //print(post)
+                            
+                            let headline = try? post.getElementsByAttribute("href").array()[0].text()
+                            let urlPart = try? post.attr("href")
+                            
+//                            print(urlPart!)
+                            
+                            let newsItem = NewsItem(myNewsTeam: team, myNewsHead: headline!, myNewsURL: urlPart!)
+                            print(newsItem)
+                            myNewsItems.append(newsItem)
+                        }
+                        
+                        doneTeams[team.myTeamName] = true
+                        print("\(team.myTeamName) is done!")
+                        
+                        var allDone = true
+                        for teamName in doneTeams.keys {
+                            allDone = allDone && doneTeams[teamName]!
+                        }
+                        
+                        if allDone == true {
+                            print("Time to sort!")
+                            self.filterNewsItems()
+                            
+                            DispatchQueue.main.async {
+                                self.tblNewsItems.reloadData()
+                            }
+                        }
+                    } catch Exception.Error(let type, let message) {
+                        print(message)
+                    } catch {
+                        print("error")
+                    }
+                }
+            }
+            task.resume()
         }
     }
+
+
+//    func loadTestNewsItems() {
+//        for newsText in testNewsTexts {
+//            print(newsText)
+//
+//            let team = newsText[0]
+//            let head = newsText[1]
+//            let URL = newsText[2]
+//
+//            let newsItem = NewsItem(myNewsTeam: Team(myTeamName: team), myNewsHead: head, myNewsURL: URL)
+//
+//            myNewsItems.append(newsItem)
+//        }
+//    }
 
     @objc
     private func refreshNewsItems(_ sender: Any) {
         print("refresh called")
+        loadNewsItems()
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.stopRefresh), userInfo: nil, repeats: false)
     }
     
     @objc
     func stopRefresh() {
-    
-        if myNewsItems.count < 4 {
-            myNewsItems.append(NewsItem(myNewsTeam: Team(myTeamName: "Varsity Field Hockey"), myNewsHead: "Jennings '15 Named MOP, Middlebury Repeats", myNewsURL: "https://www.hotchkiss.org/athletics/news-post/~post/jennings-15-named-mop-middlebury-repeats-as-ncaa-champs-20181118"))
-            
-            filterNewsItems()
-            tblNewsItems.reloadData()
-        }
-    
         refreshControl.endRefreshing()
     }
 
@@ -149,8 +207,8 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         filteredNews = [NewsItem]()
         
         for newsItem in myNewsItems {
-            for team in myNewsTeams.keys {
-                if myNewsTeams[team] == true && newsItemMatch(team: newsItem.myNewsTeam.myTeamName, key: team) {
+            for team in myScoreTeams.keys {
+                if myScoreTeams[team] == true && newsItemMatch(team: newsItem.myNewsTeam.myTeamName, key: team) {
                     filteredNews.append(newsItem)
                 }
             }

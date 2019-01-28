@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSoup
 
 class NewsItemViewController: UIViewController {
 
@@ -18,7 +19,52 @@ class NewsItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let url = myURLString {
+        
+                            let url = URL(string: myURLString!)
+        
+                            let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                                if error != nil {
+                                    print(error!)
+                                } else {
+                                    let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+        
+                                    do {
+                                        let doc: Document = try SwiftSoup.parse(htmlContent as! String)
+                                        let body: Element = doc.body()!
+        
+                                        print(self.myURLString!)
+        //                                print(body)
+        
+                                        let headline: String = try body.getElementsByClass("fsTitle").array()[0].text()
+        
+                                        let newsText: String = try body.getElementsByClass("fsBody").array()[0].text()
+        
+                                        print(headline)
+                                        print("*****")
+                                        self.lblNewsHead.text = headline
+                                        
+                                        print(newsText)
+                                        let paragraphs = self.getParagraphs(text: newsText)
+                                        print("*****")
+        
+//                                        let paragraphs: [Element] = try paragraphElts.getElementsByAttribute("<p>").array()
+//
+//                                        for paragraph in paragraphs {
+//                                            print(paragraph)
+//                                            print("****")
+//                                        }
+                                    } catch Exception.Error(let type, let message) {
+                                        print(message)
+                                    } catch {
+                                        print("error")
+                                    }
+        
+                                }
+                            }
+                            task.resume()
+
+        
+/*        if let url = myURLString {
             if url == "https://www.hotchkiss.org/athletics/news-post/~post/petersen-22-places-second-at-singlehanded-nationals-20181029" {
                 lblNewsHead.text = "Petersen '22 Places Second at Singlehanded Nationals"
                 txtViewNewsText.text = "Chapman Petersen ’22 followed his recent win at New Englands with a runner-up finish at the Cressy National Championship in the Laser Radial class.\n\nOne of only two freshmen in a field crowded with juniors and seniors, Petersen turned in a most impressive performance, finishing just six points behind the champion from Ranney School (NJ), and nearly 25 points clear of the rest of the field.\n\nThe Cressy regatta was a fleet race event held in Mactawa, MI over the weekend of Oct. 27-28. The two-day event included 14 separate races, in which each sailor earned points based on their position in each race, with the low overall score capturing the title.\n\nAfter starting off with a 12th-place finish in his first race, Petersen roared back with the first of his four wins on the day to climb into a tie for fifth place. Three more top-five finishes in the next four races would follow, and his win in the seventh race would vault him up into second place, where he remained for the rest of the event.\n\nPetersen finished in the top ten in each of the last seven races, including wins in the 10th and 13th races."
@@ -35,8 +81,14 @@ class NewsItemViewController: UIViewController {
             }
             
         }
-
+*/
         // Do any additional setup after loading the view.
+    }
+    
+    func getParagraphs(text: String) -> [String] {
+        
+        
+        return [String]()
     }
 
     override func didReceiveMemoryWarning() {
