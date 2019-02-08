@@ -156,7 +156,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func sortScores() {
-        filteredScores.sort(by: <)        
+        filteredScores.sort(by: >=)        
     }
     
     func getMonthNum(_ month: String) -> Int {

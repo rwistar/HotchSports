@@ -19,49 +19,50 @@ class NewsItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-                            let url = URL(string: myURLString!)
-        
-                            let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-                                if error != nil {
-                                    print(error!)
-                                } else {
-                                    let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-        
-                                    do {
-                                        let doc: Document = try SwiftSoup.parse(htmlContent as! String)
-                                        let body: Element = doc.body()!
-        
-                                        print(self.myURLString!)
-        //                                print(body)
-        
-                                        let headline: String = try body.getElementsByClass("fsTitle").array()[0].text()
-        
-                                        let newsText: String = try body.getElementsByClass("fsBody").array()[0].text()
-        
-                                        print(headline)
-                                        print("*****")
-                                        self.lblNewsHead.text = headline
-                                        
-                                        print(newsText)
-                                        let paragraphs = self.getParagraphs(text: newsText)
-                                        print("*****")
-        
-//                                        let paragraphs: [Element] = try paragraphElts.getElementsByAttribute("<p>").array()
-//
-//                                        for paragraph in paragraphs {
-//                                            print(paragraph)
-//                                            print("****")
-//                                        }
-                                    } catch Exception.Error(let type, let message) {
-                                        print(message)
-                                    } catch {
-                                        print("error")
-                                    }
-        
-                                }
-                            }
-                            task.resume()
+        let url = URL(string: myURLString!)
+
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if error != nil {
+                print(error!)
+            } else {
+                let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+
+                do {
+                    let doc: Document = try SwiftSoup.parse(htmlContent as! String)
+                    let body: Element = doc.body()!
+
+                    print(self.myURLString!)
+
+                    let headline: String = try body.getElementsByClass("fsTitle").array()[0].text()
+
+                    let newsText: Element = try body.getElementsByClass("fsBody").array()[0]
+
+                    DispatchQueue.main.async {
+                        print(headline)
+                        print("*****")
+                        self.lblNewsHead.text = headline
+
+                        var textStr = ""
+                        
+                        let paragraphs = self.getParagraphs(text: newsText)
+                        for paragraph in paragraphs {
+//                            print(paragraph)
+//                            print("*****")
+                            textStr += "\(paragraph)\n\n"
+                        }
+                        
+                        self.txtViewNewsText.text = textStr
+                    }
+                    
+                } catch Exception.Error(let type, let message) {
+                    print(message)
+                } catch {
+                    print("error")
+                }
+
+            }
+        }
+        task.resume()
 
         
 /*        if let url = myURLString {
@@ -85,10 +86,25 @@ class NewsItemViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func getParagraphs(text: String) -> [String] {
+    func getParagraphs(text: Element) -> [String] {
+        print("*** getParagraphs() called")
+        print("in = \(text)")
+
+        var paragraphStrs = [String]()
         
+        do {
+            var paragraphs = text.children().array()
+            
+            for paragraph in paragraphs {
+                try paragraphStrs.append(paragraph.text())
+            }
+        } catch Exception.Error(let type, let message) {
+            print(message)
+        } catch {
+            print("error")
+        }
         
-        return [String]()
+        return paragraphStrs
     }
 
     override func didReceiveMemoryWarning() {

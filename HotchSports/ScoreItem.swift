@@ -71,6 +71,10 @@ struct ScoreItem: Equatable, Comparable {
             && lhs.myScoreDate.date == rhs.myScoreDate.date)
     }
     
+    static func >= (lhs: ScoreItem, rhs: ScoreItem) -> Bool {
+        return !(lhs < rhs)
+    }
+    
     static func < (lhs: ScoreItem, rhs: ScoreItem) -> Bool {
         if let lhYear = lhs.myScoreDate.year, let rhYear = rhs.myScoreDate.year {
             if lhYear != rhYear {
