@@ -177,7 +177,11 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
      */
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredNews.count
+        if filteredNews.count == 0 {
+            return 1
+        } else {
+            return filteredNews.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -191,13 +195,18 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //            cell.backgroundColor = .white
 //        }
         
-        let newsItem = filteredNews[indexPath.row]
-        
-        let head = newsItem.myNewsHead
-        let teamName = newsItem.myNewsTeam.myTeamName
-        
-        cell.lblNewsHead.text = head
-        cell.lblNewsTeam.text = teamName
+        if filteredNews.count == 0 {
+            cell.lblNewsHead.text = "News items loading..."
+            cell.lblNewsTeam.text = ""
+        } else {
+            let newsItem = filteredNews[indexPath.row]
+            
+            let head = newsItem.myNewsHead
+            let teamName = newsItem.myNewsTeam.myTeamName
+            
+            cell.lblNewsHead.text = head
+            cell.lblNewsTeam.text = teamName
+        }
         
         return cell
     }
