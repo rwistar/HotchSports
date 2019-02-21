@@ -293,46 +293,58 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     */
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredScores.count
+        if filteredScores.count == 0 {
+            return 1
+        } else {
+            return filteredScores.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableItemScore", for: indexPath) as! ScoreTableViewCell
         
         // Configure the cell...
-        
-        if indexPath.row % 2 == 1 {
-            cell.backgroundColor = UIColor(red: 15/255, green: 43/255, blue: 91/255, alpha: 0.2)
+        if filteredScores.count == 0 {
+            cell.lblScoreTeam.text = "Scores loading..."
+            cell.lblScoreOpp.text = ""
+            cell.lblScoreDate.text = ""
+            cell.lblScoreValue.text = ""
         } else {
-            cell.backgroundColor = .white
+            if indexPath.row % 2 == 1 {
+                cell.backgroundColor = UIColor(red: 15/255, green: 43/255, blue: 91/255, alpha: 0.2)
+            } else {
+                cell.backgroundColor = .white
+            }
+            
+            let scoreItem = filteredScores[indexPath.row]
+            
+            let date = scoreItem.shortDate
+            
+            let team = scoreItem.myScoreTeam
+            
+            let loc = scoreItem.myScoreLoc
+            var locText = ""
+            switch loc {
+            case .away: locText = "@ "
+            case .home: locText = "vs. "
+            default: locText = ""
+            }
+            locText += scoreItem.myScoreOpp.myOppName
+            
+            var result = ""
+            if scoreItem.myScoreResult == .future {
+                result = scoreItem.shortTime
+            } else {
+                result = scoreItem.shortResult
+            }
+            
+            cell.lblScoreDate.text = date
+            cell.lblScoreTeam.text = team.description
+            cell.lblScoreOpp.text = locText
+            cell.lblScoreValue.text = result
+
         }
         
-        let scoreItem = filteredScores[indexPath.row]
-        
-        let date = scoreItem.shortDate
-        
-        let team = scoreItem.myScoreTeam
-        
-        let loc = scoreItem.myScoreLoc
-        var locText = ""
-        switch loc {
-        case .away: locText = "@ "
-        case .home: locText = "vs. "
-        default: locText = ""
-        }
-        locText += scoreItem.myScoreOpp.myOppName
-        
-        var result = ""
-        if scoreItem.myScoreResult == .future {
-            result = scoreItem.shortTime
-        } else {
-            result = scoreItem.shortResult
-        }
-        
-        cell.lblScoreDate.text = date
-        cell.lblScoreTeam.text = team.description
-        cell.lblScoreOpp.text = locText
-        cell.lblScoreValue.text = result
         
         return cell
     }

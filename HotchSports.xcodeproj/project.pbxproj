@@ -10,6 +10,7 @@
 		529857BAC79D5BEA7EF9D145 /* Pods_HotchSportsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C00A8B9237FDDE9740C98E5 /* Pods_HotchSportsTests.framework */; };
 		59461280D6D1DF2EB2D2C0BF /* Pods_HotchSports.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B9F33F097FA8B84D340140 /* Pods_HotchSports.framework */; };
 		8F3461F921E4302700D88F70 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8F3461F821E4302700D88F70 /* Podfile */; };
+		8F3EB90B221EE782005D8CAE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3EB90A221EE782005D8CAE /* LoginViewController.swift */; };
 		8F5EB65421C94F9700E929CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EB65321C94F9700E929CF /* AppDelegate.swift */; };
 		8F5EB65921C94F9700E929CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F5EB65721C94F9700E929CF /* Main.storyboard */; };
 		8F5EB65B21C94F9900E929CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F5EB65A21C94F9900E929CF /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		4C00A8B9237FDDE9740C98E5 /* Pods_HotchSportsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HotchSportsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D483F1A8BA2A912FCB74C55 /* Pods-HotchSports.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotchSports.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HotchSports/Pods-HotchSports.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3461F821E4302700D88F70 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8F3EB90A221EE782005D8CAE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8F5EB65021C94F9700E929CF /* HotchSports.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotchSports.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5EB65321C94F9700E929CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F5EB65821C94F9700E929CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				8F3461F821E4302700D88F70 /* Podfile */,
 				8F5EB65321C94F9700E929CF /* AppDelegate.swift */,
+				8F3EB90A221EE782005D8CAE /* LoginViewController.swift */,
 				8F5EB65F21C94F9900E929CF /* Info.plist */,
 				8F5EB65721C94F9700E929CF /* Main.storyboard */,
 				8F5EB65C21C94F9900E929CF /* LaunchScreen.storyboard */,
@@ -486,6 +489,7 @@
 				8F8A4DE721CB035C00628A43 /* TeamScoreViewController.swift in Sources */,
 				8F8A4DE521CB035C00628A43 /* ScoreFilterTableViewController.swift in Sources */,
 				8F5EB65421C94F9700E929CF /* AppDelegate.swift in Sources */,
+				8F3EB90B221EE782005D8CAE /* LoginViewController.swift in Sources */,
 				8F8A4DE121CB035C00628A43 /* NewsItemViewController.swift in Sources */,
 				8F8A4DE221CB035C00628A43 /* ScoreItem.swift in Sources */,
 				8F8A4DDD21CB035C00628A43 /* SocialViewController.swift in Sources */,
