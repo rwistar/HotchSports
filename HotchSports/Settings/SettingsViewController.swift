@@ -35,8 +35,12 @@ class SettingsViewController: UIViewController {
     */
 
     @IBAction func seasonChanged(_ sender: UISegmentedControl) {
-    
-        whichSeason = Season(rawValue: sender.selectedSegmentIndex)!
+        if sender.selectedSegmentIndex == 0 {
+            whichSeason = Season(rawValue: 1)!
+        } else {
+            let choice = sender.selectedSegmentIndex - 1
+            whichSeason = Season(rawValue: choice)!
+        }
         
         print(seasonNames[whichSeason.rawValue])
     
