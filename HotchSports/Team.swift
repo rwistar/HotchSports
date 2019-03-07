@@ -43,7 +43,22 @@ var winterTeams = [
     Team(myTeamName: "Coed Varsity Wrestling"),
 ]
 
-var allTeams = [fallTeams, winterTeams]
+var springTeams = [
+    Team(myTeamName: "Baseball"),
+    Team(myTeamName: "Boys Golf"),
+    Team(myTeamName: "Girls Golf"),
+    Team(myTeamName: "Boys Lacrosse"),
+    Team(myTeamName: "Girls Lacrosse"),
+    Team(myTeamName: "Sailing"),
+    Team(myTeamName: "Softball"),
+    Team(myTeamName: "Boys Tennis"),
+    Team(myTeamName: "Boys Track"),
+    Team(myTeamName: "Girls Track"),
+    Team(myTeamName: "Ultimate Frisbee"),
+    Team(myTeamName: "Girls Water Polo"),
+]
+
+var allTeams = [fallTeams, winterTeams, springTeams]
 
 var whichTeam = allTeams[whichSeason.rawValue]
 
@@ -71,7 +86,23 @@ var winterScoreTeams: [String: Bool] = [
     "Coed Wrestling": true,
 ]
 
-var scoreTeams = [fallScoreTeams, winterScoreTeams]
+var springScoreTeams: [String: Bool] = [
+    "Baseball": true,
+    "Boys Golf": true,
+    "Girls Golf": true,
+    "Boys Lacrosse": true,
+    "Girls Lacrosse": true,
+    "Sailing": true,
+    "Softball": true,
+    "Boys Tennis": true,
+    "Girls Tennis": true,
+    "Boys Track": true,
+    "Girls Track": true,
+    "Ultimate Frisbee": true,
+    "Girls Water Polo": true,
+]
+
+var scoreTeams = [fallScoreTeams, winterScoreTeams, springScoreTeams]
 
 var myScoreTeams = scoreTeams[whichSeason.rawValue]
 
@@ -94,6 +125,19 @@ var teamURLS: [String: String] =
     "Boys Varsity Swimming": "boys-swimming",
     "Girls Varsity Swimming": "girls-swimming",
     "Coed Varsity Wrestling": "wrestling",
+    "Baseball": "baseball",
+    "Boys Golf": "boys-golf",
+    "Girls Golf": "girls-golf",
+    "Boys Lacrosse": "boys-lacrosse",
+    "Girls Lacrosse": "girls-lacrosse",
+    "Sailing": "sailing",
+    "Softball": "softball",
+    "Boys Tennis": "boys-tennis",
+    "Girls Tennis": "girls-tennis",
+    "Boys Track": "boys-track-and-field",
+    "Girls Track": "girls-track-and-field",
+    "Ultimate Frisbee": "ultimate-frisbee",
+    "Girls Water Polo": "girls-water-polo",
 ]
 
 struct Team: CustomStringConvertible {
