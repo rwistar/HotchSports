@@ -17,14 +17,15 @@
 		8F5EB65E21C94F9900E929CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F5EB65C21C94F9900E929CF /* LaunchScreen.storyboard */; };
 		8F5EB66921C94F9900E929CF /* HotchSportsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EB66821C94F9900E929CF /* HotchSportsTests.swift */; };
 		8F5EB67421C94F9900E929CF /* HotchSportsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EB67321C94F9900E929CF /* HotchSportsUITests.swift */; };
+		8F5EBDBA22309FAF00625031 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EBDB922309FAF00625031 /* SocialViewController.swift */; };
 		8F8A4DD721CB035C00628A43 /* SelectNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC121CB035800628A43 /* SelectNotificationsViewController.swift */; };
 		8F8A4DD821CB035C00628A43 /* NewsFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC221CB035900628A43 /* NewsFilterTableViewController.swift */; };
 		8F8A4DD921CB035C00628A43 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC321CB035900628A43 /* NewsViewController.swift */; };
 		8F8A4DDA21CB035C00628A43 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC421CB035900628A43 /* ScoreViewController.swift */; };
 		8F8A4DDC21CB035C00628A43 /* SocialFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC621CB035900628A43 /* SocialFilterTableViewController.swift */; };
-		8F8A4DDD21CB035C00628A43 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC721CB035900628A43 /* SocialViewController.swift */; };
+		8F8A4DDD21CB035C00628A43 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC721CB035900628A43 /* VideoViewController.swift */; };
 		8F8A4DDE21CB035C00628A43 /* TeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC821CB035A00628A43 /* TeamTableViewController.swift */; };
-		8F8A4DDF21CB035C00628A43 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC921CB035A00628A43 /* VideoViewController.swift */; };
+		8F8A4DDF21CB035C00628A43 /* OldVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DC921CB035A00628A43 /* OldVideoViewController.swift */; };
 		8F8A4DE021CB035C00628A43 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DCA21CB035A00628A43 /* NewsItem.swift */; };
 		8F8A4DE121CB035C00628A43 /* NewsItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DCB21CB035A00628A43 /* NewsItemViewController.swift */; };
 		8F8A4DE221CB035C00628A43 /* ScoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A4DCC21CB035A00628A43 /* ScoreItem.swift */; };
@@ -74,14 +75,15 @@
 		8F5EB66F21C94F9900E929CF /* HotchSportsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HotchSportsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5EB67321C94F9900E929CF /* HotchSportsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotchSportsUITests.swift; sourceTree = "<group>"; };
 		8F5EB67521C94F9900E929CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F5EBDB922309FAF00625031 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		8F8A4DC121CB035800628A43 /* SelectNotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNotificationsViewController.swift; sourceTree = "<group>"; };
 		8F8A4DC221CB035900628A43 /* NewsFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFilterTableViewController.swift; sourceTree = "<group>"; };
 		8F8A4DC321CB035900628A43 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		8F8A4DC421CB035900628A43 /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		8F8A4DC621CB035900628A43 /* SocialFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFilterTableViewController.swift; sourceTree = "<group>"; };
-		8F8A4DC721CB035900628A43 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
+		8F8A4DC721CB035900628A43 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		8F8A4DC821CB035A00628A43 /* TeamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewController.swift; sourceTree = "<group>"; };
-		8F8A4DC921CB035A00628A43 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		8F8A4DC921CB035A00628A43 /* OldVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldVideoViewController.swift; sourceTree = "<group>"; };
 		8F8A4DCA21CB035A00628A43 /* NewsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
 		8F8A4DCB21CB035A00628A43 /* NewsItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemViewController.swift; sourceTree = "<group>"; };
 		8F8A4DCC21CB035A00628A43 /* ScoreItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreItem.swift; sourceTree = "<group>"; };
@@ -218,8 +220,9 @@
 		8F85D88E21CB043900F1DFCD /* VideoSocial */ = {
 			isa = PBXGroup;
 			children = (
-				8F8A4DC921CB035A00628A43 /* VideoViewController.swift */,
-				8F8A4DC721CB035900628A43 /* SocialViewController.swift */,
+				8F8A4DC921CB035A00628A43 /* OldVideoViewController.swift */,
+				8F8A4DC721CB035900628A43 /* VideoViewController.swift */,
+				8F5EBDB922309FAF00625031 /* SocialViewController.swift */,
 				8F8A4DC621CB035900628A43 /* SocialFilterTableViewController.swift */,
 			);
 			path = VideoSocial;
@@ -484,15 +487,16 @@
 				8F8A4DE921CB035C00628A43 /* VideoItem.swift in Sources */,
 				8F8A4DE421CB035C00628A43 /* Opponent.swift in Sources */,
 				8F8A4DDA21CB035C00628A43 /* ScoreViewController.swift in Sources */,
-				8F8A4DDF21CB035C00628A43 /* VideoViewController.swift in Sources */,
+				8F8A4DDF21CB035C00628A43 /* OldVideoViewController.swift in Sources */,
 				8F8A4DE021CB035C00628A43 /* NewsItem.swift in Sources */,
 				8F8A4DE721CB035C00628A43 /* TeamScoreViewController.swift in Sources */,
 				8F8A4DE521CB035C00628A43 /* ScoreFilterTableViewController.swift in Sources */,
 				8F5EB65421C94F9700E929CF /* AppDelegate.swift in Sources */,
+				8F5EBDBA22309FAF00625031 /* SocialViewController.swift in Sources */,
 				8F3EB90B221EE782005D8CAE /* LoginViewController.swift in Sources */,
 				8F8A4DE121CB035C00628A43 /* NewsItemViewController.swift in Sources */,
 				8F8A4DE221CB035C00628A43 /* ScoreItem.swift in Sources */,
-				8F8A4DDD21CB035C00628A43 /* SocialViewController.swift in Sources */,
+				8F8A4DDD21CB035C00628A43 /* VideoViewController.swift in Sources */,
 				8F8A4DEA21CB035C00628A43 /* SettingsViewController.swift in Sources */,
 				8F8A4DD921CB035C00628A43 /* NewsViewController.swift in Sources */,
 				8F8A4DE621CB035C00628A43 /* TeamRecordItem.swift in Sources */,
@@ -674,7 +678,9 @@
 			baseConfigurationReference = 8D483F1A8BA2A912FCB74C55 /* Pods-HotchSports.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B3GW2635UM;
 				INFOPLIST_FILE = HotchSports/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -682,6 +688,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.Hotchkiss.HotchSports;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -692,7 +699,9 @@
 			baseConfigurationReference = F71150500A0DA30D44DA4B3F /* Pods-HotchSports.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B3GW2635UM;
 				INFOPLIST_FILE = HotchSports/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -700,6 +709,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.Hotchkiss.HotchSports;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

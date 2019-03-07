@@ -9,6 +9,7 @@
 import Foundation
 
 var myNewsItems = [NewsItem]()
+var newsSeasonChanged = false
 
 struct NewsItem {
     var myNewsTeam: Team

@@ -43,7 +43,11 @@ class SettingsViewController: UIViewController {
         }
         
         print(seasonNames[whichSeason.rawValue])
-    
+        
+        whichTeam = allTeams[whichSeason.rawValue]
+        myScoreTeams = scoreTeams[whichSeason.rawValue]
+        scoreSeasonChanged = true
+        newsSeasonChanged = true
     }
     
     @IBAction func donePressed(_ sender: UIBarButtonItem) {

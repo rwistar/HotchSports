@@ -43,7 +43,9 @@ var winterTeams = [
     Team(myTeamName: "Coed Varsity Wrestling"),
 ]
 
-var whichTeams = winterTeams
+var allTeams = [fallTeams, winterTeams]
+
+var whichTeam = allTeams[whichSeason.rawValue]
 
 var fallScoreTeams: [String : Bool] = [
     "Boys Cross Country": true,
@@ -69,10 +71,20 @@ var winterScoreTeams: [String: Bool] = [
     "Coed Wrestling": true,
 ]
 
-var myScoreTeams = winterScoreTeams
+var scoreTeams = [fallScoreTeams, winterScoreTeams]
+
+var myScoreTeams = scoreTeams[whichSeason.rawValue]
 
 var teamURLS: [String: String] =
 [
+    "Varsity Field Hockey": "field-hockey",
+    "Girls Varsity Soccer": "girls-soccer",
+    "Boys Varsity Soccer": "boys-soccer",
+    "Boys Varsity Cross Country": "boys-cross-country",
+    "Girls Varsity Cross Country": "girls-cross-country",
+    "Varsity Mountain Biking": "mountain-biking",
+    "Varsity Volleyball": "volleyball",
+    "Boys Varsity Water Polo": "boys-water-polo",
     "Boys Varsity Basketball": "boys-basketball",
     "Girls Varsity Basketball": "girls-basketball",
     "Boys Varsity Hockey": "boys-hockey",

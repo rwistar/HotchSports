@@ -18,19 +18,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hotchkiss-bearcat-athletics_orig" translatesAutoresizingMaskIntoConstraints="NO" id="iQI-va-Zqf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hotchkiss-bearcat-athletics_orig" translatesAutoresizingMaskIntoConstraints="NO" id="iQI-va-Zqf">
                                 <rect key="frame" x="67" y="156" width="240" height="178"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="WGZ-CO-xcC"/>
+                                    <constraint firstAttribute="height" constant="178" id="Xn3-FJ-b3A"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HotchSports" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDE-Db-MDP">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HotchSports" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDE-Db-MDP">
                                 <rect key="frame" x="16" y="342" width="343" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="XKe-Jc-pLl"/>
+                                    <constraint firstAttribute="height" constant="75" id="zxz-O1-FwC"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                 <color key="textColor" red="0.062745098040000002" green="0.15686274510000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="iQI-va-Zqf" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5gN-t7-3Qf"/>
+                            <constraint firstItem="EDE-Db-MDP" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="46" id="Xb3-gT-3EG"/>
+                            <constraint firstItem="EDE-Db-MDP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="qiq-ZJ-KHH"/>
+                            <constraint firstItem="iQI-va-Zqf" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-88.5" id="zvu-X0-kkz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

@@ -31,17 +31,17 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var filteredNews = [NewsItem]()
     
-    var myNewsTeams: [String : Bool] = [
-        "Boys Cross Country": true,
-        "Girls Cross Country": true,
-        "Field Hockey": true,
-        "Mountain Biking": true,
-        "Football": true,
-        "Boys Soccer": true,
-        "Girls Soccer": true,
-        "Volleyball": true,
-        "Water Polo": true
-    ]
+//    var myNewsTeams: [String : Bool] = [
+//        "Boys Cross Country": true,
+//        "Girls Cross Country": true,
+//        "Field Hockey": true,
+//        "Mountain Biking": true,
+//        "Football": true,
+//        "Boys Soccer": true,
+//        "Girls Soccer": true,
+//        "Volleyball": true,
+//        "Water Polo": true
+//    ]
     
     var selectedURL = ""
     
@@ -66,12 +66,20 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if newsSeasonChanged == true {
+            loadNewsItems()
+        }
+    }
+    
     func loadNewsItems() {
         myNewsItems = []
         
         var doneTeams: [String: Bool] = [:]
     
-        for team in whichTeams {
+        for team in whichTeam {
             doneTeams[team.myTeamName] = false
         
             let teamURL = teamURLS[team.myTeamName]
@@ -266,7 +274,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         if segue.identifier == "segueNewsFilter" {
             if let destination = segue.destination as? NewsFilterTableViewController {
-                destination.teamFlags = myNewsTeams
+                destination.teamFlags = myScoreTeams
 
                 destination.tableView.reloadData()
 
@@ -287,7 +295,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func updateNewsTable(teamFlags: [String : Bool]) {
         print("\n\n\nUPDATE_SCORE_TABLE")
         
-        myNewsTeams = teamFlags
+        myScoreTeams = teamFlags
         filterNewsItems()
         tblNewsItems.reloadData()
     }

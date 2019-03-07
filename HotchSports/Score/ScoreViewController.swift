@@ -39,16 +39,52 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var filteredScores = [ScoreItem]()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tblScores.dataSource = self
+        tblScores.delegate = self
+        
+        tblScores.rowHeight = 60.0
+                
+        // Do any additional setup after loading the view.
+        
+        //loadTestScores()
+        loadScores()
+//        filterScores()
+//        sortScores()
+        
+        if #available(iOS 10.0, *) {
+            tblScores.refreshControl = refreshControl
+        } else {
+            tblScores.addSubview(refreshControl)
+        }
+
+        refreshControl.addTarget(self, action: #selector(refreshScores(_:)), for: .valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing Scores")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if scoreSeasonChanged == true {
+            loadScores()
+//            filterScores()
+//            sortScores()
+            
+        }
+    }
+    
     func loadScores() {
         myScoreItems = []
-    
+        
         var doneTeams: [String: Bool] = [:]
-    
-        for team in whichTeams {
+        
+        for team in whichTeam {
             doneTeams[team.myTeamName] = false
-        
+            
             let teamURL = teamURLS[team.myTeamName]
-        
+            
             let url = URL(string: "https://www.hotchkiss.org/athletics/our-teams/\(teamURL!)/varsity")!
             print(url)
             
@@ -61,7 +97,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                     do {
                         let doc: Document = try SwiftSoup.parse(htmlContent as! String)
                         let body: Element = doc.body()!
-
+                        
                         for tag in ["fsResultCustom", "fsResultWin", "fsResultLoss", "fsResultTie"] {
                             let scoreHTML: Elements = try body.getElementsByClass(tag)
                             
@@ -80,7 +116,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 let month: String = try dateItems.getElementsByClass("fsMonth").array()[0].text()
                                 let day: String = try dateItems.getElementsByClass("fsDay").array()[0].text()
                                 let monthNum = self.getMonthNum(month)
-
+                                
                                 let timeItems: Element = try score.getElementsByClass("fsAthleticsTime").array()[0]
                                 let hour: String = try timeItems.getElementsByClass("fsHour").text()
                                 let mins: String = try timeItems.getElementsByClass("fsMinute").text()
@@ -94,14 +130,14 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                         hourVal = hourInt
                                     }
                                 }
-
+                                
                                 var dateComponents = DateComponents()
                                 dateComponents.year = Int(String(year))
                                 dateComponents.month = monthNum
                                 dateComponents.day = Int(day)
                                 dateComponents.hour = hourVal
                                 dateComponents.minute = Int(mins)
-
+                                
                                 let score: String = try score.getElementsByClass("fsAthleticsScore").text()
                                 
                                 var loc: ScoreItem.Location = .other
@@ -110,7 +146,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 } else {
                                     loc = .away
                                 }
-
+                                
                                 var result: ScoreItem.GameResult = .other
                                 switch tag {
                                 case "fsResultWin": result = .win
@@ -120,9 +156,9 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 case "fsResultCustom": result = .future
                                 default: result = .other
                                 }
-
+                                
                                 let scoreItem = ScoreItem(myScoreTeam: team, myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opponent), myScoreResult: result, myScoreText: score)
-
+                                
                                 myScoreItems.append(scoreItem)
                             }
                         }
@@ -139,6 +175,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                             print("Time to sort!")
                             self.filterScores()
                             self.sortScores()
+                            scoreSeasonChanged = false
                             
                             DispatchQueue.main.async {
                                 self.tblScores.reloadData()
@@ -156,7 +193,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func sortScores() {
-        filteredScores.sort(by: >=)        
+        filteredScores.sort(by: >=)
     }
     
     func getMonthNum(_ month: String) -> Int {
@@ -176,31 +213,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         default: return -1
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tblScores.dataSource = self
-        tblScores.delegate = self
-        
-        tblScores.rowHeight = 60.0
-                
-        // Do any additional setup after loading the view.
-        
-        //loadTestScores()
-        loadScores()
-        filterScores()
-        sortScores()
-        
-        if #available(iOS 10.0, *) {
-            tblScores.refreshControl = refreshControl
-        } else {
-            tblScores.addSubview(refreshControl)
-        }
-
-        refreshControl.addTarget(self, action: #selector(refreshScores(_:)), for: .valueChanged)
-        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing Scores")
-    }
+    
     
     @objc
     private func refreshScores(_ sender: Any) {

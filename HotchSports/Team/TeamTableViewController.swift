@@ -41,7 +41,7 @@ class TeamTableViewController: UITableViewController {
     func loadTeamRecords() {
         myRecordItems = [TeamRecordItem]()
     
-        for team in whichTeams {
+        for team in whichTeam {
             var wins = 0
             var losses = 0
             var ties = 0
