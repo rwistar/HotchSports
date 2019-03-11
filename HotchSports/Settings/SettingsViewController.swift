@@ -1,3 +1,4 @@
+
 //
 //  SettingsViewController.swift
 //  HotchSportsProto
@@ -36,7 +37,27 @@ class SettingsViewController: UIViewController {
 
     @IBAction func seasonChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            whichSeason = Season(rawValue: 1)!
+            let date = Date()
+            let calendar = Calendar.current
+            
+            let month = calendar.component(.month, from: date)
+            let dayNum = calendar.component(.day, from: date)
+            
+            if month == 11 && dayNum >= 25 {
+                whichSeason = Season(rawValue: 1)!
+            } else if month == 12 {
+                whichSeason = Season(rawValue: 1)!
+            } else if month < 3 {
+                whichSeason = Season(rawValue: 1)!
+            } else if month == 3 && dayNum <= 15 {
+                whichSeason = Season(rawValue: 1)!
+            } else if month == 3 && dayNum > 15 {
+                whichSeason = Season(rawValue: 2)!
+            } else if month > 3 && month < 9 {
+                whichSeason = Season(rawValue: 2)!
+            } else {
+                whichSeason = Season(rawValue: 0)!
+            }            
         } else {
             let choice = sender.selectedSegmentIndex - 1
             whichSeason = Season(rawValue: choice)!
@@ -53,5 +74,11 @@ class SettingsViewController: UIViewController {
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func bugPressed(_ sender: UIBarButtonItem) {
+        guard let url = URL(string: "https://tinyurl.com/HotchSportsbugs") else { return }
+        UIApplication.shared.open(url)
+    }
+    
     
 }
