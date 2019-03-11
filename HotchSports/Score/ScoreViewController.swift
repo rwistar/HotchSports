@@ -68,6 +68,9 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidAppear(animated)
         
         if scoreSeasonChanged == true {
+            filteredScores = []
+            tblScores.reloadData()
+            
             loadScores()
 //            filterScores()
 //            sortScores()

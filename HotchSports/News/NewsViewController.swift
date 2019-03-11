@@ -70,6 +70,9 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidAppear(animated)
         
         if newsSeasonChanged == true {
+            filteredNews = []
+            tblNewsItems.reloadData()
+            
             loadNewsItems()
         }
     }
