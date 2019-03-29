@@ -98,7 +98,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                     let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                     
                     do {
-                        let doc: Document = try SwiftSoup.parse(htmlContent as! String)
+                        let doc: Document = try SwiftSoup.parse(htmlContent! as String)
                         let body: Element = doc.body()!
                         
                         for tag in ["fsResultCustom", "fsResultWin", "fsResultLoss", "fsResultTie"] {
@@ -184,7 +184,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 self.tblScores.reloadData()
                             }
                         }
-                    } catch Exception.Error(let type, let message) {
+                    } catch Exception.Error(_, let message) {
                         print(message)
                     } catch {
                         print("error")

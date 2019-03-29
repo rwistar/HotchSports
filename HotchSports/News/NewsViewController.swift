@@ -97,7 +97,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                     
                     do {
-                        let doc: Document = try SwiftSoup.parse(htmlContent as! String)
+                        let doc: Document = try SwiftSoup.parse(htmlContent! as String)
                         let body: Element = doc.body()!
 
                         let postsHTML: Elements = try body.getElementsByClass("fsPostLink")
@@ -133,7 +133,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                 self.tblNewsItems.reloadData()
                             }
                         }
-                    } catch Exception.Error(let type, let message) {
+                    } catch Exception.Error(_, let message) {
                         print(message)
                     } catch {
                         print("error")

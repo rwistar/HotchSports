@@ -28,7 +28,7 @@ class NewsItemViewController: UIViewController {
                 let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
 
                 do {
-                    let doc: Document = try SwiftSoup.parse(htmlContent as! String)
+                    let doc: Document = try SwiftSoup.parse(htmlContent! as String)
                     let body: Element = doc.body()!
 
                     print(self.myURLString!)
@@ -54,7 +54,7 @@ class NewsItemViewController: UIViewController {
                         self.txtViewNewsText.text = textStr
                     }
                     
-                } catch Exception.Error(let type, let message) {
+                } catch Exception.Error(_, let message) {
                     print(message)
                 } catch {
                     print("error")
@@ -93,12 +93,12 @@ class NewsItemViewController: UIViewController {
         var paragraphStrs = [String]()
         
         do {
-            var paragraphs = text.children().array()
+            let paragraphs = text.children().array()
             
             for paragraph in paragraphs {
                 try paragraphStrs.append(paragraph.text())
             }
-        } catch Exception.Error(let type, let message) {
+        } catch Exception.Error(_, let message) {
             print(message)
         } catch {
             print("error")

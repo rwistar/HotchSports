@@ -15,8 +15,14 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setSegment()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func setSegment() {
+        segSeason.selectedSegmentIndex = whichSeason.rawValue
     }
 
     override func didReceiveMemoryWarning() {
