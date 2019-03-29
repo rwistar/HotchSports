@@ -10,18 +10,24 @@
 import UIKit
 
 var whichSeason: Season = .winter
-var newsSeasonChanged = false
-var scoreSeasonChanged = false
+var newsSettingsChanged = false
+var scoreSettingsChanged = false
 
+var whichScoreSort: ScoreSort = .oldest
 
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var segSeason: UISegmentedControl!
     
+    @IBOutlet weak var segScoreSort: UISegmentedControl!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setSegment()
+        
+        segScoreSort.selectedSegmentIndex = whichScoreSort.rawValue
 
         // Do any additional setup after loading the view.
     }
@@ -62,8 +68,8 @@ class SettingsViewController: UIViewController {
 
         updateTeamChosen()
 
-        scoreSeasonChanged = true
-        newsSeasonChanged = true
+        scoreSettingsChanged = true
+        newsSettingsChanged = true
     }
     
     func updateTeamChosen() {
@@ -98,6 +104,15 @@ class SettingsViewController: UIViewController {
         whichTeam = allTeams[season.rawValue]
         myScoreTeams = scoreTeams[season.rawValue]
     }
+    
+    @IBAction func scoreSortChanged(_ sender: UISegmentedControl) {
+        whichScoreSort = ScoreSort(rawValue: sender.selectedSegmentIndex)!
+        
+        scoreSettingsChanged = true
+        newsSettingsChanged = true
+        
+    }
+    
     
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)

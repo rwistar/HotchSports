@@ -10,6 +10,11 @@ import Foundation
 
 var myScoreItems = [ScoreItem]()
 
+enum ScoreSort: Int {
+    case oldest = 0
+    case newest = 1
+}
+
 struct ScoreItem: Equatable, Comparable {
     enum GameResult {
         case win, lose, tie, scrimmage, cancel, postpone, other, future

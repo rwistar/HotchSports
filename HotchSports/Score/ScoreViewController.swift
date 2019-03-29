@@ -67,7 +67,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if scoreSeasonChanged == true {
+        if scoreSettingsChanged == true {
             filteredScores = []
             tblScores.reloadData()
             
@@ -178,7 +178,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                             print("Time to sort!")
                             self.filterScores()
                             self.sortScores()
-                            scoreSeasonChanged = false
+                            scoreSettingsChanged = false
                             
                             DispatchQueue.main.async {
                                 self.tblScores.reloadData()
@@ -196,7 +196,11 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func sortScores() {
-        filteredScores.sort(by: >=)
+        if whichScoreSort == .newest {
+            filteredScores.sort(by: >=)
+        } else {
+            filteredScores.sort(by: <)
+        }
     }
     
     func getMonthNum(_ month: String) -> Int {

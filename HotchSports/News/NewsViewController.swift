@@ -69,7 +69,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if newsSeasonChanged == true {
+        if newsSettingsChanged == true {
             filteredNews = []
             tblNewsItems.reloadData()
             

@@ -93,6 +93,7 @@
                                     <segment title="Newest First"/>
                                 </segments>
                                 <connections>
+                                    <action selector="scoreSortChanged:" destination="hcJ-9t-yXn" eventType="valueChanged" id="Teg-YB-E8S"/>
                                     <action selector="seasonChanged:" destination="hcJ-9t-yXn" eventType="valueChanged" id="vID-H5-IQH"/>
                                 </connections>
                             </segmentedControl>
@@ -121,6 +122,7 @@
                         <viewLayoutGuide key="safeArea" id="XKn-0d-KS5"/>
                     </view>
                     <connections>
+                        <outlet property="segScoreSort" destination="iv6-Bx-9RC" id="hwc-Yj-tzZ"/>
                         <outlet property="segSeason" destination="zNf-BF-rzh" id="i7v-P4-ZQi"/>
                     </connections>
                 </viewController>
