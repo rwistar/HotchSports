@@ -10,15 +10,14 @@ import Foundation
 
 //var allTeams = [Team]()
 
-var seasonNames = ["Fall", "Winter", "Spring"]
+var seasonNames = ["Fall", "Winter", "Spring", "Auto"]
 
 enum Season: Int {
     case fall = 0
     case winter = 1
     case spring = 2
+    case auto = 3
 }
-
-var whichSeason: Season = .winter
 
 var fallTeams = [
     Team(myTeamName: "Varsity Field Hockey"),

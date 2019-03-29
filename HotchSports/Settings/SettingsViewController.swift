@@ -9,6 +9,11 @@
 
 import UIKit
 
+var whichSeason: Season = .winter
+var newsSeasonChanged = false
+var scoreSeasonChanged = false
+
+
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var segSeason: UISegmentedControl!
@@ -22,7 +27,11 @@ class SettingsViewController: UIViewController {
     }
     
     func setSegment() {
-        segSeason.selectedSegmentIndex = whichSeason.rawValue
+        if whichSeason == .auto {
+            segSeason.selectedSegmentIndex = 0
+        } else {
+            segSeason.selectedSegmentIndex = whichSeason.rawValue + 1
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +52,24 @@ class SettingsViewController: UIViewController {
 
     @IBAction func seasonChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
+            whichSeason = .auto
+        } else {
+            let choice = sender.selectedSegmentIndex - 1
+            whichSeason = Season(rawValue: choice)!
+        }
+        
+    print(seasonNames[whichSeason.rawValue])
+
+        updateTeamChosen()
+
+        scoreSeasonChanged = true
+        newsSeasonChanged = true
+    }
+    
+    func updateTeamChosen() {
+        var season : Season = .auto
+        
+        if whichSeason == .auto {
             let date = Date()
             let calendar = Calendar.current
             
@@ -50,31 +77,26 @@ class SettingsViewController: UIViewController {
             let dayNum = calendar.component(.day, from: date)
             
             if month == 11 && dayNum >= 25 {
-                whichSeason = Season(rawValue: 1)!
+                season = .winter
             } else if month == 12 {
-                whichSeason = Season(rawValue: 1)!
+                season = .winter
             } else if month < 3 {
-                whichSeason = Season(rawValue: 1)!
+                season = .winter
             } else if month == 3 && dayNum <= 15 {
-                whichSeason = Season(rawValue: 1)!
+                season = .winter
             } else if month == 3 && dayNum > 15 {
-                whichSeason = Season(rawValue: 2)!
+                season = .spring
             } else if month > 3 && month < 9 {
-                whichSeason = Season(rawValue: 2)!
+                season = .spring
             } else {
-                whichSeason = Season(rawValue: 0)!
-            }            
+                season = .fall
+            }
         } else {
-            let choice = sender.selectedSegmentIndex - 1
-            whichSeason = Season(rawValue: choice)!
+            season = whichSeason
         }
         
-        print(seasonNames[whichSeason.rawValue])
-        
-        whichTeam = allTeams[whichSeason.rawValue]
-        myScoreTeams = scoreTeams[whichSeason.rawValue]
-        scoreSeasonChanged = true
-        newsSeasonChanged = true
+        whichTeam = allTeams[season.rawValue]
+        myScoreTeams = scoreTeams[season.rawValue]
     }
     
     @IBAction func donePressed(_ sender: UIBarButtonItem) {

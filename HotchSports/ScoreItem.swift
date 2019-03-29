@@ -9,7 +9,6 @@
 import Foundation
 
 var myScoreItems = [ScoreItem]()
-var scoreSeasonChanged = false
 
 struct ScoreItem: Equatable, Comparable {
     enum GameResult {
