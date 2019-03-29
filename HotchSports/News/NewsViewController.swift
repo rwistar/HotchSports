@@ -23,25 +23,8 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var timer = Timer()
     
-    var testNewsTexts = [
-        ["Varsity Sailing", "Petersen '22 Places Second at Singlehanded Nationals", "https://www.hotchkiss.org/athletics/news-post/~post/petersen-22-places-second-at-singlehanded-nationals-20181029"],
-        ["Boys Varsity Cross Country", "Sidamon-Eristoff '19 Powers Boys Cross Country Past Choate", "https://www.hotchkiss.org/athletics/news-post/~post/sidamon-eristoff-19-powers-boys-cross-country-past-choate-20181022"],
-        ["Girls Varsity Soccer", "Girls Soccer Draws With Choate in Prime Time", "https://www.hotchkiss.org/athletics/news-post/~post/girls-soccer-draws-with-choate-in-prime-time-20181021"],
-    ]
-    
     var filteredNews = [NewsItem]()
-    
-//    var myNewsTeams: [String : Bool] = [
-//        "Boys Cross Country": true,
-//        "Girls Cross Country": true,
-//        "Field Hockey": true,
-//        "Mountain Biking": true,
-//        "Football": true,
-//        "Boys Soccer": true,
-//        "Girls Soccer": true,
-//        "Volleyball": true,
-//        "Water Polo": true
-//    ]
+    var filteredNewsItems = [String: NewsItem]()
     
     var selectedURL = ""
     
@@ -79,6 +62,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func loadNewsItems() {
         myNewsItems = []
+        newsItems = [:]
         
         var doneTeams: [String: Bool] = [:]
     
@@ -115,6 +99,7 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             let newsItem = NewsItem(myNewsTeam: team, myNewsHead: headline!, myNewsURL: urlPart!)
                             print(newsItem)
                             myNewsItems.append(newsItem)
+                            newsItems[headline!] = newsItem
                         }
                         
                         doneTeams[team.myTeamName] = true
@@ -143,21 +128,6 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             task.resume()
         }
     }
-
-
-//    func loadTestNewsItems() {
-//        for newsText in testNewsTexts {
-//            print(newsText)
-//
-//            let team = newsText[0]
-//            let head = newsText[1]
-//            let URL = newsText[2]
-//
-//            let newsItem = NewsItem(myNewsTeam: Team(myTeamName: team), myNewsHead: head, myNewsURL: URL)
-//
-//            myNewsItems.append(newsItem)
-//        }
-//    }
 
     @objc
     private func refreshNewsItems(_ sender: Any) {
@@ -226,13 +196,22 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func filterNewsItems() {
         filteredNews = [NewsItem]()
         
-        for newsItem in myNewsItems {
+//        for newsItem in myNewsItems {
+//            for team in myScoreTeams.keys {
+//                if myScoreTeams[team] == true && newsItemMatch(team: newsItem.myNewsTeam.myTeamName, key: team) {
+//                    filteredNews.append(newsItem)
+//                }
+//            }
+//        }
+        
+        for newsItem in newsItems.values {
             for team in myScoreTeams.keys {
                 if myScoreTeams[team] == true && newsItemMatch(team: newsItem.myNewsTeam.myTeamName, key: team) {
                     filteredNews.append(newsItem)
                 }
             }
         }
+
     }
     
     /// checks to see if a given team matches a generic program name (e.g., does "Boys JV Soccer" contain "Boys Soccer"? --> TRUE)

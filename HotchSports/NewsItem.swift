@@ -10,6 +10,8 @@ import Foundation
 
 var myNewsItems = [NewsItem]()
 
+var newsItems = [String: NewsItem]()
+
 struct NewsItem {
     var myNewsTeam: Team
     var myNewsHead: String
