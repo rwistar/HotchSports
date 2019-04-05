@@ -211,6 +211,8 @@ class NewsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 }
             }
         }
+        
+        filteredNews.sort(by: <)
 
     }
     

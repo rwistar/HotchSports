@@ -16,4 +16,18 @@ struct NewsItem {
     var myNewsTeam: Team
     var myNewsHead: String
     var myNewsURL: String
+    
+    static func == (lhs: NewsItem, rhs: NewsItem) -> Bool {
+        return (lhs.myNewsTeam.myTeamName == rhs.myNewsTeam.myTeamName
+            && lhs.myNewsHead == rhs.myNewsHead
+            && lhs.myNewsURL == rhs.myNewsURL)
+    }
+    
+    static func >= (lhs: NewsItem, rhs: NewsItem) -> Bool {
+        return !(lhs < rhs)
+    }
+    
+    static func < (lhs: NewsItem, rhs: NewsItem) -> Bool {
+        return lhs.myNewsTeam.myTeamName < rhs.myNewsTeam.myTeamName        
+    }
 }
