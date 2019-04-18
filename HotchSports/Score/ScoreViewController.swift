@@ -141,8 +141,8 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 dateComponents.hour = hourVal
                                 dateComponents.minute = Int(mins)
                                 
-                                let score: String = try score.getElementsByClass("fsAthleticsScore").text()
-                                
+                                let scoretext: String = try score.getElementsByClass("fsAthleticsScore").text()
+
                                 var loc: ScoreItem.Location = .other
                                 if homeAway == "Hotchkiss" {
                                     loc = .home
@@ -150,17 +150,35 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                     loc = .away
                                 }
                                 
+                                let gameresult: String = try score.getElementsByClass("fsAthleticsResult").text()
+
                                 var result: ScoreItem.GameResult = .other
-                                switch tag {
-                                case "fsResultWin": result = .win
-                                case "fsResultLoss": result = .lose
-                                case "fsResultTie": result = .tie
-                                //case "cancel": result = .cancel
-                                case "fsResultCustom": result = .future
-                                default: result = .other
+
+                                if tag == "fsResultCustom" {
+                                    result = .future
                                 }
                                 
-                                let scoreItem = ScoreItem(myScoreTeam: team, myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opponent), myScoreResult: result, myScoreText: score)
+                                if scoretext != "" {
+                                    result = .other
+                                }
+                                
+                                if gameresult == "Win" {
+                                    result = .win
+                                } else if gameresult == "Loss" {
+                                    result = .lose
+                                } else if gameresult == "Tie" {
+                                    result = .tie
+                                }
+
+//                                switch gameresult {
+//                                case "Win": result = .win
+//                                case "Loss": result = .lose
+//                                case "Tie": result = .tie
+//                                //case "cancel": result = .cancel
+//                                default: result = result
+//                                }
+                                
+                                let scoreItem = ScoreItem(myScoreTeam: team, myScoreDate: dateComponents, myScoreLoc: loc, myScoreOpp: Opponent(myOppName: opponent), myScoreResult: result, myScoreText: scoretext)
                                 
                                 myScoreItems.append(scoreItem)
                             }

@@ -49,12 +49,13 @@ var springTeams = [
     Team(myTeamName: "Boys Lacrosse"),
     Team(myTeamName: "Girls Lacrosse"),
     Team(myTeamName: "Sailing"),
-    Team(myTeamName: "Softball"),
+//    Team(myTeamName: "Softball"),
     Team(myTeamName: "Boys Tennis"),
+    Team(myTeamName: "Girls Tennis"),
     Team(myTeamName: "Boys Track"),
     Team(myTeamName: "Girls Track"),
     Team(myTeamName: "Ultimate Frisbee"),
-    Team(myTeamName: "Girls Water Polo"),
+//    Team(myTeamName: "Girls Water Polo"),
 ]
 
 var allTeams = [fallTeams, winterTeams, springTeams]
@@ -70,7 +71,7 @@ var fallScoreTeams: [String : Bool] = [
     "Boys Soccer": true,
     "Girls Soccer": true,
     "Volleyball": true,
-    "Water Polo": true,
+    "Boys Water Polo": true,
 ]
 
 var winterScoreTeams: [String: Bool] = [
@@ -92,13 +93,13 @@ var springScoreTeams: [String: Bool] = [
     "Boys Lacrosse": true,
     "Girls Lacrosse": true,
     "Sailing": true,
-    "Softball": true,
+//    "Softball": true,
     "Boys Tennis": true,
     "Girls Tennis": true,
     "Boys Track": true,
     "Girls Track": true,
     "Ultimate Frisbee": true,
-    "Girls Water Polo": true,
+//    "Girls Water Polo": true,
 ]
 
 var scoreTeams = [fallScoreTeams, winterScoreTeams, springScoreTeams]

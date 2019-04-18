@@ -9,7 +9,7 @@
 
 import UIKit
 
-var whichSeason: Season = .winter
+var whichSeason: Season = .spring
 var newsSettingsChanged = false
 var scoreSettingsChanged = false
 
