@@ -97,6 +97,13 @@
                                     <action selector="seasonChanged:" destination="hcJ-9t-yXn" eventType="valueChanged" id="vID-H5-IQH"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NA6-EH-xEr">
+                                <rect key="frame" x="182" y="832" width="50" height="30"/>
+                                <state key="normal" title="Credits"/>
+                                <connections>
+                                    <segue destination="RVI-cU-UTA" kind="presentation" id="E4f-7t-sxd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -118,6 +125,8 @@
                             <constraint firstItem="aK0-Zk-4hE" firstAttribute="top" secondItem="lku-dK-Rlp" secondAttribute="bottom" constant="32" id="isG-Fr-qYv"/>
                             <constraint firstItem="XKn-0d-KS5" firstAttribute="trailing" secondItem="7wr-Sw-gQG" secondAttribute="trailing" constant="16" id="k87-2S-U9A"/>
                             <constraint firstItem="iv6-Bx-9RC" firstAttribute="centerY" secondItem="aK0-Zk-4hE" secondAttribute="centerY" id="tI7-8X-dTC"/>
+                            <constraint firstItem="NA6-EH-xEr" firstAttribute="centerX" secondItem="t5n-i8-Kbh" secondAttribute="centerX" id="tzP-nj-5fr"/>
+                            <constraint firstItem="NA6-EH-xEr" firstAttribute="bottom" secondItem="XKn-0d-KS5" secondAttribute="bottom" id="upW-3B-wTo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XKn-0d-KS5"/>
                     </view>
@@ -856,6 +865,54 @@
             </objects>
             <point key="canvasLocation" x="3592.8000000000002" y="1508.9955022488757"/>
         </scene>
+        <!--Credits View Controller-->
+        <scene sceneID="RRz-uZ-2he">
+            <objects>
+                <viewController id="RVI-cU-UTA" customClass="CreditsViewController" customModule="HotchSports" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2rt-GM-g6o">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKI-a9-KdX">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Credits" id="Ww7-Me-UQN">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="6ec-RM-ziu">
+                                            <connections>
+                                                <action selector="donePressed:" destination="RVI-cU-UTA" id="NHD-LK-8ej"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TPZ-dG-qdv">
+                                <rect key="frame" x="16" y="88" width="382" height="774"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lead Designer: Roger Wistar
+
+Executive Sponsors: John Reed, Robin Chandler
+</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pKI-a9-KdX" firstAttribute="trailing" secondItem="qDP-X8-Geo" secondAttribute="trailing" id="5tF-fp-uOv"/>
+                            <constraint firstItem="pKI-a9-KdX" firstAttribute="top" secondItem="qDP-X8-Geo" secondAttribute="top" id="APV-fT-Qxv"/>
+                            <constraint firstItem="TPZ-dG-qdv" firstAttribute="bottom" secondItem="qDP-X8-Geo" secondAttribute="bottom" id="Hjm-v5-fZE"/>
+                            <constraint firstItem="TPZ-dG-qdv" firstAttribute="leading" secondItem="qDP-X8-Geo" secondAttribute="leading" constant="16" id="esV-xl-rdy"/>
+                            <constraint firstItem="TPZ-dG-qdv" firstAttribute="top" secondItem="pKI-a9-KdX" secondAttribute="bottom" id="ljB-T6-TNA"/>
+                            <constraint firstItem="pKI-a9-KdX" firstAttribute="leading" secondItem="qDP-X8-Geo" secondAttribute="leading" id="pbh-b8-TeL"/>
+                            <constraint firstItem="qDP-X8-Geo" firstAttribute="trailing" secondItem="TPZ-dG-qdv" secondAttribute="trailing" constant="16" id="vpg-gn-QPh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qDP-X8-Geo"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g4M-uP-rWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4757.971014492754" y="1508.7053571428571"/>
+        </scene>
         <!--Select Feed-->
         <scene sceneID="ASm-mE-IhO">
             <objects>
@@ -975,6 +1032,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="72b-Dg-zmK"/>
-        <segue reference="VJn-hl-Sjf"/>
+        <segue reference="rry-am-DYl"/>
     </inferredMetricsTieBreakers>
 </document>

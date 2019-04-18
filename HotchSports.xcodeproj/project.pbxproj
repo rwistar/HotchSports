@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		529857BAC79D5BEA7EF9D145 /* Pods_HotchSportsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C00A8B9237FDDE9740C98E5 /* Pods_HotchSportsTests.framework */; };
 		59461280D6D1DF2EB2D2C0BF /* Pods_HotchSports.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B9F33F097FA8B84D340140 /* Pods_HotchSports.framework */; };
+		8F197AFB2268BBD200153325 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F197AFA2268BBD200153325 /* CreditsViewController.swift */; };
 		8F3461F921E4302700D88F70 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8F3461F821E4302700D88F70 /* Podfile */; };
 		8F3EB90B221EE782005D8CAE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3EB90A221EE782005D8CAE /* LoginViewController.swift */; };
 		8F5EB65421C94F9700E929CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5EB65321C94F9700E929CF /* AppDelegate.swift */; };
@@ -61,6 +62,7 @@
 		3AD3AE84D9D211C53795C791 /* Pods-HotchSportsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotchSportsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HotchSportsUITests/Pods-HotchSportsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4C00A8B9237FDDE9740C98E5 /* Pods_HotchSportsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HotchSportsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D483F1A8BA2A912FCB74C55 /* Pods-HotchSports.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotchSports.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HotchSports/Pods-HotchSports.debug.xcconfig"; sourceTree = "<group>"; };
+		8F197AFA2268BBD200153325 /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		8F3461F821E4302700D88F70 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8F3EB90A221EE782005D8CAE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8F5EB65021C94F9700E929CF /* HotchSports.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotchSports.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,6 +235,7 @@
 			children = (
 				8F8A4DD421CB035B00628A43 /* SettingsViewController.swift */,
 				8F8A4DC121CB035800628A43 /* SelectNotificationsViewController.swift */,
+				8F197AFA2268BBD200153325 /* CreditsViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				8F8A4DE921CB035C00628A43 /* VideoItem.swift in Sources */,
 				8F8A4DE421CB035C00628A43 /* Opponent.swift in Sources */,
 				8F8A4DDA21CB035C00628A43 /* ScoreViewController.swift in Sources */,
+				8F197AFB2268BBD200153325 /* CreditsViewController.swift in Sources */,
 				8F8A4DDF21CB035C00628A43 /* OldVideoViewController.swift in Sources */,
 				8F8A4DE021CB035C00628A43 /* NewsItem.swift in Sources */,
 				8F8A4DE721CB035C00628A43 /* TeamScoreViewController.swift in Sources */,
