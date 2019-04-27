@@ -9,7 +9,7 @@
 
 import UIKit
 
-var whichSeason: Season = .spring
+var whichSeason: Season = .auto
 var newsSettingsChanged = false
 var scoreSettingsChanged = false
 
@@ -66,13 +66,13 @@ class SettingsViewController: UIViewController {
         
     print(seasonNames[whichSeason.rawValue])
 
-        updateTeamChosen()
+        SettingsViewController.updateTeamChosen()
 
         scoreSettingsChanged = true
         newsSettingsChanged = true
     }
     
-    func updateTeamChosen() {
+    static func updateTeamChosen() {
         var season : Season = .auto
         
         if whichSeason == .auto {

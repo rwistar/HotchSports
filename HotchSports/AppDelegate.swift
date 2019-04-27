@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print("Setting category to AVAudioSessionCategoryPlayback failed.")
 //        }
         
+        SettingsViewController.updateTeamChosen()
+
+        
         return true
     }
 

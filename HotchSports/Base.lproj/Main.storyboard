@@ -241,7 +241,7 @@
                                                     <color key="textColor" red="0.062745098040000002" green="0.15686274510000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhr-ap-KHm">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nhr-ap-KHm">
                                                     <rect key="frame" x="279" y="8" width="127" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="127" id="3HB-CV-VUF"/>
@@ -257,7 +257,7 @@
                                                     <color key="textColor" red="0.062745098040000002" green="0.15686274510000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pv-pG-dHH">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5pv-pG-dHH">
                                                     <rect key="frame" x="8" y="42.666666666666664" width="398" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.062745098040000002" green="0.15686274510000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -628,7 +628,7 @@
                                                     <color key="textColor" red="0.062745098040000002" green="0.15686274510000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0A-dU-OiI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Q0A-dU-OiI">
                                                     <rect key="frame" x="279" y="8" width="127" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="127" id="3Lb-BY-1sl"/>
@@ -638,7 +638,7 @@
                                                     <color key="textColor" red="0.062745098040000002" green="0.15686274510000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uS4-KK-Fio">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uS4-KK-Fio">
                                                     <rect key="frame" x="8" y="42.666666666666664" width="398" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.062745098040000002" green="0.15686274510000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -721,7 +721,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News Item Headline" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZc-LD-5CV">
-                                                    <rect key="frame" x="20" y="3" width="335" height="44"/>
+                                                    <rect key="frame" x="20" y="3" width="374" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="9B1-0O-Gwq"/>
                                                     </constraints>
@@ -730,7 +730,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0F-4Z-7bv">
-                                                    <rect key="frame" x="20" y="46" width="335" height="17"/>
+                                                    <rect key="frame" x="20" y="46" width="374" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.062745098040000002" green="0.15686274510000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1025,6 +1025,6 @@ Executive Sponsors: John Reed, Robin Chandler
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="oJW-Cm-oVF"/>
-        <segue reference="G42-jC-ipE"/>
+        <segue reference="kVQ-h6-0Fe"/>
     </inferredMetricsTieBreakers>
 </document>

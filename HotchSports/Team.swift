@@ -60,7 +60,7 @@ var springTeams = [
 
 var allTeams = [fallTeams, winterTeams, springTeams]
 
-var whichTeam = allTeams[whichSeason.rawValue]
+var whichTeam: [Team] = []
 
 var fallScoreTeams: [String : Bool] = [
     "Boys Cross Country": true,
@@ -104,7 +104,7 @@ var springScoreTeams: [String: Bool] = [
 
 var scoreTeams = [fallScoreTeams, winterScoreTeams, springScoreTeams]
 
-var myScoreTeams = scoreTeams[whichSeason.rawValue]
+var myScoreTeams : [String: Bool] = [:]
 
 var teamURLS: [String: String] =
 [
