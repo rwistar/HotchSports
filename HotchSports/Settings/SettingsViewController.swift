@@ -9,11 +9,12 @@
 
 import UIKit
 
-var whichSeason: Season = .auto
 var newsSettingsChanged = false
 var scoreSettingsChanged = false
 
+var whichSeason: Season = .auto
 var whichScoreSort: ScoreSort = .oldest
+var whichScoreShow: ScoreShow = .allScores
 
 class SettingsViewController: UIViewController {
 
@@ -21,6 +22,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var segScoreSort: UISegmentedControl!
     
+    @IBOutlet weak var segScoreShow: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,7 @@ class SettingsViewController: UIViewController {
         
         segScoreSort.selectedSegmentIndex = whichScoreSort.rawValue
 
+        segScoreShow.selectedSegmentIndex = whichScoreShow.rawValue
         // Do any additional setup after loading the view.
     }
     
@@ -113,6 +116,13 @@ class SettingsViewController: UIViewController {
         
     }
     
+    @IBAction func scoreShowChanged(_ sender: UISegmentedControl) {
+        whichScoreShow = ScoreShow(rawValue: sender.selectedSegmentIndex)!
+        
+        scoreSettingsChanged = true
+        newsSettingsChanged = true
+        
+    }
     
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)

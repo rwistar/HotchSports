@@ -141,6 +141,26 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 dateComponents.hour = hourVal
                                 dateComponents.minute = Int(mins)
                                 
+                                if whichScoreShow == .recentScores {
+                                    let today = Date()
+                                    let calendar = Calendar.current
+                                    let scoreDate = calendar.date(from: dateComponents)!
+//                                    let todayDay = calendar.component(.day, from: today)
+//                                    let daysSince = dateComponents.day! - todayDay
+//
+//                                    if abs(daysSince) > 7 {
+//                                        continue
+//                                    }
+                                    
+                                    let diff = calendar.dateComponents([.day], from: today, to: scoreDate).day!
+                                    if abs(diff) > 7 {
+                                        continue
+                                    }
+                                    
+                                    
+
+                                }
+                                
                                 let scoretext: String = try score.getElementsByClass("fsAthleticsScore").text()
 
                                 var loc: ScoreItem.Location = .other

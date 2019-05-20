@@ -15,6 +15,11 @@ enum ScoreSort: Int {
     case newest = 1
 }
 
+enum ScoreShow: Int {
+    case allScores = 0
+    case recentScores = 1
+}
+
 struct ScoreItem: Equatable, Comparable {
     enum GameResult {
         case win, lose, tie, scrimmage, cancel, postpone, other, future

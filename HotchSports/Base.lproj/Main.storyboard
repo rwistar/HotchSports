@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qKI-wk-Oor">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="V7I-Jm-iKv">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -87,14 +87,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iv6-Bx-9RC">
-                                <rect key="frame" x="159" y="225.66666666666666" width="239" height="29"/>
+                                <rect key="frame" x="158" y="225.66666666666666" width="240" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="kHA-7x-dnt"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Oldest First"/>
                                     <segment title="Newest First"/>
                                 </segments>
                                 <connections>
                                     <action selector="scoreSortChanged:" destination="hcJ-9t-yXn" eventType="valueChanged" id="Teg-YB-E8S"/>
-                                    <action selector="seasonChanged:" destination="hcJ-9t-yXn" eventType="valueChanged" id="vID-H5-IQH"/>
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NA6-EH-xEr">
@@ -104,24 +106,49 @@
                                     <segue destination="RVI-cU-UTA" kind="presentation" id="E4f-7t-sxd"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show scores" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHR-DO-W3X">
+                                <rect key="frame" x="16.000000000000007" y="282" width="97.666666666666686" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="XL7-22-sQn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7cn-bz-NLh">
+                                <rect key="frame" x="158" y="278.66666666666669" width="240" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="i8z-AQ-SYJ"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="All Scores"/>
+                                    <segment title="Recent Scores"/>
+                                </segments>
+                                <connections>
+                                    <action selector="scoreShowChanged:" destination="hcJ-9t-yXn" eventType="valueChanged" id="WxN-B0-xPf"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Azl-Pp-Og2" firstAttribute="trailing" secondItem="XKn-0d-KS5" secondAttribute="trailing" id="0lR-ai-MRW"/>
                             <constraint firstItem="Azl-Pp-Og2" firstAttribute="top" secondItem="XKn-0d-KS5" secondAttribute="top" id="2wl-ar-mtM"/>
                             <constraint firstItem="zNf-BF-rzh" firstAttribute="top" secondItem="Azl-Pp-Og2" secondAttribute="bottom" constant="28" id="460-WS-cSE"/>
-                            <constraint firstItem="iv6-Bx-9RC" firstAttribute="leading" secondItem="aK0-Zk-4hE" secondAttribute="trailing" constant="32" id="5AH-rS-umO"/>
                             <constraint firstItem="Azl-Pp-Og2" firstAttribute="leading" secondItem="XKn-0d-KS5" secondAttribute="leading" id="76O-xu-K5H"/>
                             <constraint firstItem="yVH-Nb-bOS" firstAttribute="top" secondItem="Azl-Pp-Og2" secondAttribute="bottom" constant="32" id="7sJ-Vm-xkZ"/>
+                            <constraint firstItem="lHR-DO-W3X" firstAttribute="leading" secondItem="XKn-0d-KS5" secondAttribute="leading" constant="16" id="G4N-yR-D31"/>
                             <constraint firstItem="lku-dK-Rlp" firstAttribute="top" secondItem="zNf-BF-rzh" secondAttribute="bottom" constant="32" id="GK6-Xf-JrO"/>
                             <constraint firstItem="aK0-Zk-4hE" firstAttribute="leading" secondItem="XKn-0d-KS5" secondAttribute="leading" constant="16" id="HWH-DX-72n"/>
+                            <constraint firstItem="lHR-DO-W3X" firstAttribute="top" secondItem="aK0-Zk-4hE" secondAttribute="bottom" constant="32" id="IvE-eN-chp"/>
                             <constraint firstItem="lku-dK-Rlp" firstAttribute="leading" secondItem="XKn-0d-KS5" secondAttribute="leading" constant="16" id="N3w-Wg-bfD"/>
                             <constraint firstItem="XKn-0d-KS5" firstAttribute="trailing" secondItem="zNf-BF-rzh" secondAttribute="trailing" constant="16" id="Ofn-xh-33T"/>
                             <constraint firstItem="yVH-Nb-bOS" firstAttribute="leading" secondItem="XKn-0d-KS5" secondAttribute="leading" constant="16" id="V7T-HL-rIa"/>
                             <constraint firstItem="XKn-0d-KS5" firstAttribute="trailing" secondItem="iv6-Bx-9RC" secondAttribute="trailing" constant="16" id="WIm-Oa-qmQ"/>
                             <constraint firstItem="zNf-BF-rzh" firstAttribute="leading" secondItem="yVH-Nb-bOS" secondAttribute="trailing" constant="32" id="WkX-eX-AJp"/>
+                            <constraint firstItem="XKn-0d-KS5" firstAttribute="trailing" secondItem="7cn-bz-NLh" secondAttribute="trailing" constant="16" id="edg-92-XmA"/>
                             <constraint firstItem="7wr-Sw-gQG" firstAttribute="leading" secondItem="lku-dK-Rlp" secondAttribute="trailing" constant="190" id="iL2-b4-4rR"/>
                             <constraint firstItem="7wr-Sw-gQG" firstAttribute="top" secondItem="zNf-BF-rzh" secondAttribute="bottom" constant="27" id="iaJ-sC-lu3"/>
+                            <constraint firstItem="7cn-bz-NLh" firstAttribute="centerY" secondItem="lHR-DO-W3X" secondAttribute="centerY" id="igT-jy-jo3"/>
                             <constraint firstItem="aK0-Zk-4hE" firstAttribute="top" secondItem="lku-dK-Rlp" secondAttribute="bottom" constant="32" id="isG-Fr-qYv"/>
                             <constraint firstItem="XKn-0d-KS5" firstAttribute="trailing" secondItem="7wr-Sw-gQG" secondAttribute="trailing" constant="16" id="k87-2S-U9A"/>
                             <constraint firstItem="iv6-Bx-9RC" firstAttribute="centerY" secondItem="aK0-Zk-4hE" secondAttribute="centerY" id="tI7-8X-dTC"/>
@@ -131,6 +158,7 @@
                         <viewLayoutGuide key="safeArea" id="XKn-0d-KS5"/>
                     </view>
                     <connections>
+                        <outlet property="segScoreShow" destination="7cn-bz-NLh" id="rwp-GQ-phK"/>
                         <outlet property="segScoreSort" destination="iv6-Bx-9RC" id="hwc-Yj-tzZ"/>
                         <outlet property="segSeason" destination="zNf-BF-rzh" id="i7v-P4-ZQi"/>
                     </connections>
@@ -829,7 +857,7 @@
                                 <color key="textColor" red="0.062745098040000002" green="0.15686274510000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cm6-sr-Dqe">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cm6-sr-Dqe">
                                 <rect key="frame" x="16" y="154" width="382" height="659"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -884,7 +912,10 @@
                                 <string key="text">Lead Designer: Roger Wistar
 
 Executive Sponsors: John Reed, Robin Chandler
-</string>
+
+Beta testers: Alex Kinney, Jason Maier, John Reed, Jiahua Chen, Harrison Stallaert, Arhan Chhabra, Reece Yang, Nadia Puente, Scott Shrager, George Raynal
+
+Special thanks: Hotchkiss ITS Department</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -1025,6 +1056,6 @@ Executive Sponsors: John Reed, Robin Chandler
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="oJW-Cm-oVF"/>
-        <segue reference="kVQ-h6-0Fe"/>
+        <segue reference="G42-jC-ipE"/>
     </inferredMetricsTieBreakers>
 </document>
