@@ -67,12 +67,15 @@ class SettingsViewController: UIViewController {
             whichSeason = Season(rawValue: choice)!
         }
         
-    print(seasonNames[whichSeason.rawValue])
+        print(seasonNames[whichSeason.rawValue])
 
         SettingsViewController.updateTeamChosen()
 
         scoreSettingsChanged = true
         newsSettingsChanged = true
+        
+        let defaults = UserDefaults.standard
+        defaults.set(whichSeason.rawValue, forKey: "whichSeason")
     }
     
     static func updateTeamChosen() {
@@ -114,6 +117,9 @@ class SettingsViewController: UIViewController {
         scoreSettingsChanged = true
         newsSettingsChanged = true
         
+        let defaults = UserDefaults.standard
+        defaults.set(whichScoreSort.rawValue, forKey: "whichScoreSort")
+        
     }
     
     @IBAction func scoreShowChanged(_ sender: UISegmentedControl) {
@@ -121,6 +127,9 @@ class SettingsViewController: UIViewController {
         
         scoreSettingsChanged = true
         newsSettingsChanged = true
+        
+        let defaults = UserDefaults.standard
+        defaults.set(whichScoreShow.rawValue, forKey: "whichScoreShow")
         
     }
     

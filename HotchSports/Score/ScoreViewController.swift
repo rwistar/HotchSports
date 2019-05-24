@@ -141,25 +141,25 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                                 dateComponents.hour = hourVal
                                 dateComponents.minute = Int(mins)
                                 
-                                if whichScoreShow == .recentScores {
-                                    let today = Date()
-                                    let calendar = Calendar.current
-                                    let scoreDate = calendar.date(from: dateComponents)!
-//                                    let todayDay = calendar.component(.day, from: today)
-//                                    let daysSince = dateComponents.day! - todayDay
+//                                if whichScoreShow == .recentScores {
+//                                    let today = Date()
+//                                    let calendar = Calendar.current
+//                                    let scoreDate = calendar.date(from: dateComponents)!
+////                                    let todayDay = calendar.component(.day, from: today)
+////                                    let daysSince = dateComponents.day! - todayDay
+////
+////                                    if abs(daysSince) > 7 {
+////                                        continue
+////                                    }
 //
-//                                    if abs(daysSince) > 7 {
+//                                    let diff = calendar.dateComponents([.day], from: today, to: scoreDate).day!
+//                                    if abs(diff) > 7 {
 //                                        continue
 //                                    }
-                                    
-                                    let diff = calendar.dateComponents([.day], from: today, to: scoreDate).day!
-                                    if abs(diff) > 7 {
-                                        continue
-                                    }
-                                    
-                                    
-
-                                }
+//
+//
+//
+//                                }
                                 
                                 let scoretext: String = try score.getElementsByClass("fsAthleticsScore").text()
 
@@ -423,6 +423,23 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         filteredScores = [ScoreItem]()
         
         for scoreItem in myScoreItems {
+            
+            if whichScoreShow == .recentScores {
+                let today = Date()
+                let calendar = Calendar.current
+                
+                let dateComponents = scoreItem.myScoreDate
+                
+                let scoreDate = calendar.date(from: dateComponents)!
+
+                let diff = calendar.dateComponents([.day], from: today, to: scoreDate).day!
+                if abs(diff) > 7 {
+                    continue
+                }
+            }
+
+            
+            
             for team in myScoreTeams.keys {
                 if myScoreTeams[team] == true && scoreItemMatch(team: scoreItem.myScoreTeam.myTeamName, key: team) {
                     filteredScores.append(scoreItem)

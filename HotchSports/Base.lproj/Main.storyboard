@@ -61,7 +61,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lku-dK-Rlp">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lku-dK-Rlp">
                                 <rect key="frame" x="16" y="176" width="97" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="97" id="sfo-Gc-fPU"/>
@@ -70,7 +70,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wr-Sw-gQG">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wr-Sw-gQG">
                                 <rect key="frame" x="303" y="171" width="95" height="30"/>
                                 <state key="normal" title="Select..."/>
                                 <connections>
@@ -92,8 +92,8 @@
                                     <constraint firstAttribute="width" constant="240" id="kHA-7x-dnt"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Oldest First"/>
-                                    <segment title="Newest First"/>
+                                    <segment title="Oldest"/>
+                                    <segment title="Newest"/>
                                 </segments>
                                 <connections>
                                     <action selector="scoreSortChanged:" destination="hcJ-9t-yXn" eventType="valueChanged" id="Teg-YB-E8S"/>
@@ -121,8 +121,8 @@
                                     <constraint firstAttribute="width" constant="240" id="i8z-AQ-SYJ"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="All Scores"/>
-                                    <segment title="Recent Scores"/>
+                                    <segment title="All"/>
+                                    <segment title="Recent"/>
                                 </segments>
                                 <connections>
                                     <action selector="scoreShowChanged:" destination="hcJ-9t-yXn" eventType="valueChanged" id="WxN-B0-xPf"/>

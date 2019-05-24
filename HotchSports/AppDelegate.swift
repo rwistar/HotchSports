@@ -18,16 +18,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        let audioSession = AVAudioSession.sharedInstance()
-//        do {
-//            try audioSession.setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)), mode: <#AVAudioSession.Mode#>)
-//        }
-//        catch {
-//            print("Setting category to AVAudioSessionCategoryPlayback failed.")
-//        }
+        print("*** didFinishLaunchingWithOptions()")
         
         SettingsViewController.updateTeamChosen()
-
+        
+        let defaults = UserDefaults.standard
+        if let season = Season(rawValue: defaults.integer(forKey: "whichSeason")) {
+            whichSeason = season
+        }
+        
+        if let sort = ScoreSort(rawValue: defaults.integer(forKey: "whichScoreSort")) {
+            whichScoreSort = sort
+        }
+        
+        if let show = ScoreShow(rawValue: defaults.integer(forKey: "whichScoreShow")) {
+            whichScoreShow = show
+        }
         
         return true
     }
@@ -52,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+
+        
     }
 
 
